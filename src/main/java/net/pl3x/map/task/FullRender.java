@@ -224,7 +224,8 @@ public class FullRender extends BukkitRunnable {
                 biomeColor = BiomeColors.grass(biome, pos1);
             } else if (mat == Material.LEAVES || mat == Material.PLANT || mat == Material.REPLACEABLE_PLANT) {
                 biomeColor = BiomeColors.foliage(biome, pos1);
-            } else if (worldConfig.MAP_WATER_BIOMES && mat == Material.WATER) {
+            } else if (worldConfig.MAP_WATER_BIOMES &&
+                    (mat == Material.WATER || mat == Material.WATER_PLANT || mat == Material.REPLACEABLE_WATER_PLANT)) {
                 waterColor = BiomeColors.water(biome, pos1);
             }
         }
