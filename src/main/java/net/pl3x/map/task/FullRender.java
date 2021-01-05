@@ -4,14 +4,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import javax.imageio.ImageIO;
 import net.minecraft.server.v1_16_R3.BiomeBase;
+import net.minecraft.server.v1_16_R3.BiomeFog;
 import net.minecraft.server.v1_16_R3.BiomeStorage;
 import net.minecraft.server.v1_16_R3.BlockPosition;
 import net.minecraft.server.v1_16_R3.Blocks;
@@ -35,6 +29,17 @@ import net.pl3x.map.util.SpiralIterator;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class FullRender extends BukkitRunnable {
     private static final MaterialMapColor BLACK = MaterialMapColor.b;
@@ -171,6 +176,7 @@ public class FullRender extends BukkitRunnable {
         int odd = (imgX + imgZ & 1);
         multiset.clear();
         int biomeColor = -1;
+        int water = -1;
         if (nmsWorld.getDimensionManager().hasCeiling()) {
             // TODO figure out how to actually map the nether instead of this crap
             int l3 = (chunk.getPos().getBlockX() + imgX) + (chunk.getPos().getBlockZ() + imgZ) * 231871;
@@ -213,12 +219,19 @@ public class FullRender extends BukkitRunnable {
                         BiomeStorage biomeStorage = chunk.getBiomeIndex();
                         if (biomeStorage != null) {
                             BiomeBase biome = biomeStorage.getBiome(pos1.getX(), curY, pos1.getZ());
+
+                            final Optional<Integer> grassColor = BiomeColors.grassColor(biome);
+                            final Optional<Integer> foliageColor = BiomeColors.foliageColor(biome);
+                            final int waterColor = BiomeColors.waterColor(biome);
+
                             float temp = MathHelper.a(biome.k(), 0.0F, 1.0F);
                             float humidity = MathHelper.a(biome.getHumidity(), 0.0F, 1.0F);
                             if (mat == Material.GRASS) {
-                                biomeColor = BiomeColors.getGrassColor(temp, humidity);
+                                biomeColor = grassColor.orElseGet(() -> BiomeColors.getGrassColor(temp, humidity));
                             } else if (mat == Material.LEAVES || mat == Material.PLANT || mat == Material.REPLACEABLE_PLANT) {
-                                biomeColor = BiomeColors.getFoliageColor(temp, humidity);
+                                biomeColor = foliageColor.orElseGet(() -> BiomeColors.getFoliageColor(temp, humidity));
+                            } else if (mat == Material.WATER) {
+                                water = waterColor;
                             }
                         }
                     }
@@ -241,12 +254,14 @@ public class FullRender extends BukkitRunnable {
         MaterialMapColor color = Iterables.getFirst(Multisets.copyHighestCountFirst(multiset), BLACK);
         if (color == null) {
             color = BLACK;
-        } else if (color == BLUE) {
+        } else if (color == BLUE || water != -1) {
             diffY = (double) fluidCountY * 0.1D + (double) odd * 0.2D;
             colorOffset = (byte) (diffY < 0.5D ? 2 : (diffY > 0.9D ? 0 : 1));
         }
 
-        return shade(color.rgb, colorOffset);
+        final int finalColor = water == -1 ? color.rgb : water;
+
+        return shade(finalColor, colorOffset);
     }
 
     private MaterialMapColor getColor(IBlockData state) {
@@ -321,6 +336,57 @@ public class FullRender extends BukkitRunnable {
                 foliage = init(ImageIO.read(new File(new File(FileUtil.getWebFolder(), "images"), "foliage.png")));
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+
+        private static final Field grass_color = needField(BiomeFog.class, "g");
+        private static final Field foliage_color = needField(BiomeFog.class, "f");
+        private static final Field water_color = needField(BiomeFog.class, "c");
+
+        @SuppressWarnings("unchecked")
+        private static @NonNull Optional<Integer> grassColor(final @NonNull BiomeBase biome) {
+            try {
+                return (Optional<Integer>) grass_color.get(biomeEffects(biome));
+            } catch (final IllegalAccessException e) {
+                throw new IllegalStateException("Could not find grass color", e);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        private static @NonNull Optional<Integer> foliageColor(final @NonNull BiomeBase biome) {
+            try {
+                return (Optional<Integer>) foliage_color.get(biomeEffects(biome));
+            } catch (final IllegalAccessException e) {
+                throw new IllegalStateException("Could not find foliage color", e);
+            }
+        }
+
+        private static int waterColor(final @NonNull BiomeBase biome) {
+            try {
+                return water_color.getInt(biomeEffects(biome));
+            } catch (final IllegalAccessException e) {
+                throw new IllegalStateException("Could not find water color", e);
+            }
+        }
+
+        public static @NonNull BiomeFog biomeEffects(final @NonNull BiomeBase biome) {
+            return biome.l();
+        }
+
+        private static @NonNull Field needField(final @NonNull Class<?> clazz, final @NonNull String name) {
+            try {
+                final Field field = clazz.getDeclaredField(name);
+                field.setAccessible(true);
+                return field;
+            } catch (final NoSuchFieldException e) {
+                throw new IllegalStateException(
+                        String.format(
+                                "Could not locate field %s in class %s",
+                                name,
+                                clazz.getSimpleName()
+                        ),
+                        e
+                );
             }
         }
     }
