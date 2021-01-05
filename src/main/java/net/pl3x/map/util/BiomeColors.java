@@ -23,19 +23,14 @@ public final class BiomeColors {
     }
 
     public static int foliage(final @NonNull BiomeBase biome, final @NonNull BlockPosition blockPosition) {
-        return modifiedGrassColor(
-                biome,
-                blockPosition,
-                BiomeEffectsReflection.foliageColor(biome).orElse(Colors.foliageMapColor().rgb),
-                1.0f
-        );
+        return BiomeEffectsReflection.grassColor(biome).orElse(Colors.grassMapColor().rgb);
     }
 
-    public static int water(final @NonNull BiomeBase biome) {
+    public static int water(final @NonNull BiomeBase biome, final @NonNull BlockPosition blockPosition) {
         return BiomeEffectsReflection.waterColor(biome);
     }
 
-    private static int modifiedGrassColor(final @NonNull BiomeBase biome, final @NonNull BlockPosition pos, int color, float shade) {
+    private static int modifiedGrassColor(final @NonNull BiomeBase biome, final @NonNull BlockPosition pos, final int color, final float shade) {
         final String modifier = BiomeEffectsReflection.grassColorModifier(biome).getName().toUpperCase(Locale.ENGLISH); // As of 1.16.4: Can be SWAMP, DARK_FOREST, or NONE
         switch (modifier) {
             case "NONE":
@@ -53,7 +48,7 @@ public final class BiomeColors {
         }
     }
 
-    private static int mix(int c1, int c2, float ratio) {
+    private static int mix(final int c1, final int c2, float ratio) {
         if (ratio > 1f) ratio = 1f;
         else if (ratio < 0f) ratio = 0f;
         float iRatio = 1.0f - ratio;
