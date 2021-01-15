@@ -79,13 +79,13 @@ class Pl3xMap {
         return this.map.project(latlng, this.worldList.curWorld.zoom.max);
     }
     createElement(tag, id, parent) {
-        var element = document.createElement(tag);
+        const element = document.createElement(tag);
         element.id = id;
         element.parent = parent;
         return element;
     }
     createTextElement(tag, text) {
-        var element = document.createElement(tag);
+        const element = document.createElement(tag);
         element.appendChild(document.createTextNode(text));
         return element;
     }
@@ -103,22 +103,22 @@ class Pl3xMap {
             });
     }
     getUrlParam(query, def) {
-        var url = window.location.search.substring(1);
-        var vars = url.split('&');
-        for (var i = 0; i < vars.length; i++) {
-            var param = vars[i].split('=');
+        const url = window.location.search.substring(1);
+        const vars = url.split('&');
+        for (let i = 0; i < vars.length; i++) {
+            const param = vars[i].split('=');
             if (param[0] === query) {
-                var value = param[1] === undefined ? '' : decodeURIComponent(param[1]);
+                const value = param[1] === undefined ? '' : decodeURIComponent(param[1]);
                 return value === '' ? def : value;
             }
         }
         return def;
     }
     getUrlFromView() {
-        var center = this.project(this.map.getCenter());
-        var zoom = this.map.getZoom();
-        var x = Math.floor(center.x);
-        var z = Math.floor(center.y);
+        const center = this.project(this.map.getCenter());
+        const zoom = this.map.getZoom();
+        const x = Math.floor(center.x);
+        const z = Math.floor(center.y);
         return "?world=" + this.worldList.curWorld.name + "&zoom=" + zoom + "&x=" + x + "&z=" + z;
     }
     updateBrowserUrl(url) {
@@ -131,14 +131,14 @@ class WorldList {
     constructor(json) {
         this.worlds = new Map();
 
-        for (var i = 0; i < json.length; i++) {
-            var world = new World(json[i]);
+        for (let i = 0; i < json.length; i++) {
+            const world = new World(json[i]);
             this.worlds.set(world.name, world);
 
-            var link = P.createElement("a", world.name, this);
+            const link = P.createElement("a", world.name, this);
             link.onclick = function() {
-                var curWorld = this.parent.curWorld;
-                var name = this.id;
+                const curWorld = this.parent.curWorld;
+                const name = this.id;
                 if (curWorld.name == name) {
                     P.centerOn(curWorld.spawn.x, curWorld.spawn.z, curWorld.zoom.def);
                     return;
@@ -147,7 +147,7 @@ class WorldList {
                 this.parent.loadWorld(name);
             };
 
-            var img = document.createElement("img");
+            const img = document.createElement("img");
             switch(world.type) {
                 case "nether":
                     img.src = "images/red-cube-smol.png";
@@ -174,7 +174,7 @@ class WorldList {
         }
 
         // load new world
-        var world = this.worlds.get(name);
+        const world = this.worlds.get(name);
         this.curWorld = world;
         world.load(callback);
     }
@@ -218,7 +218,7 @@ class World {
             .replaceAll("{world}", json.display_name);
 
         // setup background
-        var mapDom = document.getElementById("map");
+        const mapDom = document.getElementById("map");
         switch(json.type) {
             case "nether":
                 mapDom.style.background = "url('images/nether_sky.png')";
@@ -320,7 +320,7 @@ class Sidebar {
 class Fieldset {
     constructor(id, title) {
         this.element = P.createElement("fieldset", id);
-        var legend = P.createTextElement("legend", title);
+        const legend = P.createTextElement("legend", title);
         this.element.appendChild(legend);
     }
 }
@@ -355,10 +355,10 @@ class PlayerList {
         P.map.createPane("nameplate").style.zIndex = 1000;
     }
     showPlayer(link) {
-        var uuid = link.id;
-        var keys = Array.from(P.playerList.players.keys());
-        for (var i = 0; i < keys.length; i++) {
-            var player = P.playerList.players.get(keys[i]);
+        const uuid = link.id;
+        const keys = Array.from(P.playerList.players.keys());
+        for (let i = 0; i < keys.length; i++) {
+            const player = P.playerList.players.get(keys[i]);
             if (uuid == player.uuid && player.world != world) {
                 P.worldList.showWorld(player.world, function () {
                     P.map.panTo(P.unproject(player.x, player.z));
@@ -367,28 +367,28 @@ class PlayerList {
         }
     }
     add(player) {
-        var head = document.createElement("img");
+        const head = document.createElement("img");
         head.src = P.getHeadUrl(player);
-        var span = P.createTextElement("span", player.name);
-        var link = P.createElement("a", player.uuid, this);
+        const span = P.createTextElement("span", player.name);
+        const link = P.createElement("a", player.uuid, this);
         link.onclick = function() {
             this.parent.showPlayer(this);
         };
         link.appendChild(head);
         link.appendChild(span);
-        var fieldset = P.sidebar.playerList.element;
+        const fieldset = P.sidebar.playerList.element;
         fieldset.appendChild(link);
     }
     remove(uuid) {
-        var player = document.getElementById(uuid);
+        const player = document.getElementById(uuid);
         if (player != null) {
             player.remove();
         }
     }
     update(players) {
-        var playersToRemove = Array.from(this.players.keys());
-        for (var i = 0; i < players.length; i++) {
-            var player = this.players.get(players[i].uuid);
+        const playersToRemove = Array.from(this.players.keys());
+        for (let i = 0; i < players.length; i++) {
+            let player = this.players.get(players[i].uuid);
             if (player == null) {
                 player = new Player(players[i]);
                 this.players.set(player.uuid, player);
@@ -397,17 +397,17 @@ class PlayerList {
             player.update(players[i]);
             playersToRemove.remove(players[i].uuid);
         }
-        for (var i = 0; i < playersToRemove.length; i++) {
-            var player = this.players.get(playersToRemove[i]);
+        for (let i = 0; i < playersToRemove.length; i++) {
+            const player = this.players.get(playersToRemove[i]);
             player.marker.remove();
             this.players.delete(player.uuid);
             this.remove(player.uuid);
         }
     }
     clearMarkers() {
-        var keys = Array.from(this.players.keys());
-        for (var i = 0; i < keys.length; i++) {
-            var player = this.players.get(keys[i]);
+        const keys = Array.from(this.players.keys());
+        for (let i = 0; i < keys.length; i++) {
+            const player = this.players.get(keys[i]);
             player.marker.remove();
         }
     }
@@ -431,13 +431,13 @@ class Player {
             rotationAngle: (180 + player.yaw)
         });
         if (P.worldList.curWorld.player_tracker.nameplates.enabled) {
-            var tooltip = L.tooltip({
+            const tooltip = L.tooltip({
                 permanent: true,
                 direction: "right",
                 offset: [10,0],
                 pane: "nameplate"
             });
-            var headImg = "";
+            const headImg = "";
             if (P.worldList.curWorld.player_tracker.nameplates.show_heads) {
                 headImg = "<img src='" + P.getHeadUrl(player) + "' />";
             }
@@ -450,11 +450,11 @@ class Player {
         this.z = player.z;
         if (P.worldList.curWorld.name == player.world) {
             this.marker.addTo(P.playersLayer);
-            var latlng = P.unproject(player.x, player.z);
+            const latlng = P.unproject(player.x, player.z);
             if (!this.marker.getLatLng().equals(latlng)) {
                 this.marker.setLatLng(latlng);
             }
-            var angle = 180 + player.yaw;
+            const angle = 180 + player.yaw;
             if (this.marker.options.rotationAngle != angle) {
                 this.marker.setRotationAngle(angle);
             }
@@ -467,24 +467,24 @@ class Player {
 
 class UICoordinates {
     constructor() {
-        let Coords = L.Control.extend({
+        const Coords = L.Control.extend({
             _container: null,
             options: {
                 position: 'bottomleft'
             },
             onAdd: function (map) {
-                var coords = L.DomUtil.create('div', 'leaflet-control-layers coordinates');
+                const coords = L.DomUtil.create('div', 'leaflet-control-layers coordinates');
                 this._coords = coords;
                 this.updateHTML(null);
                 return coords;
             },
             updateHTML: function(point) {
-                var x = point == null ? "---" : Math.round(point.x);
-                var z = point == null ? "---" : Math.round(point.y);
+                const x = point == null ? "---" : Math.round(point.x);
+                const z = point == null ? "---" : Math.round(point.y);
                 this._coords.innerHTML = "Coordinates<br />" + x + ", " + z;
             }
         });
-        var coords = new Coords();
+        const coords = new Coords();
         P.map.addControl(coords);
         P.map.addEventListener('mousemove', (event) => {
             if (P.worldList.curWorld != null) {
