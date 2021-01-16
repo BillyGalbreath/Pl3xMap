@@ -14,10 +14,10 @@ class WorldList {
                 const curWorld = this.parent.curWorld;
                 const name = this.id;
                 if (curWorld.name == name) {
-                    this.P.centerOn(curWorld.spawn.x, curWorld.spawn.z, curWorld.zoom.def);
+                    this.parent.P.centerOn(curWorld.spawn.x, curWorld.spawn.z, curWorld.zoom.def);
                     return;
                 }
-                this.P.playerList.clearMarkers();
+                this.parent.P.playerList.clearMarkers();
                 this.parent.loadWorld(name);
             };
 

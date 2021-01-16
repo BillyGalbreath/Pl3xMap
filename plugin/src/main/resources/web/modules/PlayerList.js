@@ -12,8 +12,9 @@ class PlayerList {
         for (let i = 0; i < keys.length; i++) {
             const player = this.P.playerList.players.get(keys[i]);
             if (uuid == player.uuid && player.world != world) {
-                this.P.worldList.showWorld(player.world, function () {
-                    this.P.map.panTo(this.P.unproject(player.x, player.z));
+                const P = this.P;
+                P.worldList.showWorld(player.world, function () {
+                    P.map.panTo(P.unproject(player.x, player.z));
                 });
             }
         }
