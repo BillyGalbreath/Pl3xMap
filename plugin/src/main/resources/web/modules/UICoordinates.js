@@ -14,7 +14,7 @@ class UICoordinates {
             updateHTML: function (point) {
                 const x = point == null ? "---" : Math.round(point.x);
                 const z = point == null ? "---" : Math.round(point.y);
-                this._coords.innerHTML = "Coordinates<br />" + x + ", " + z;
+                this._coords.innerHTML = `Coordinates<br />${x}, ${z}`;
             }
         });
         const coords = new Coords();

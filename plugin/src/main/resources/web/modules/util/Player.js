@@ -24,9 +24,9 @@ class Player {
             });
             let headImg = "";
             if (P.worldList.curWorld.player_tracker.nameplates.show_heads) {
-                headImg = "<img src='" + P.getHeadUrl(player) + "' />";
+                headImg = `<img src='${P.getHeadUrl(player)}' />`;
             }
-            tooltip.setContent(headImg + "<span>" + player.name + "</span>");
+            tooltip.setContent(`${headImg}<span>${player.name}</span>`);
             this.marker.bindTooltip(tooltip);
         }
     }

@@ -10,7 +10,7 @@ class World {
     }
     load(callback) {
         const P = this.P;
-        P.getJSON("tiles/" + this.name + "/settings.json", (json) => P.worldList.curWorld.__load(json, callback));
+        P.getJSON(`tiles/${this.name}/settings.json`, (json) => P.worldList.curWorld.__load(json, callback));
     }
     unload() {
         this.spawn.hide();
@@ -43,7 +43,7 @@ class World {
         if (this.P.tileLayer != null) {
             this.P.map.removeLayer(this.P.tileLayer);
         }
-        this.P.tileLayer = L.tileLayer("tiles/" + this.name + "/{z}/{x}_{y}.png", {
+        this.P.tileLayer = L.tileLayer(`tiles/${this.name}/{z}/{x}_{y}.png`, {
             tileSize: 512,
             minNativeZoom: 0,
             maxNativeZoom: this.zoom.max

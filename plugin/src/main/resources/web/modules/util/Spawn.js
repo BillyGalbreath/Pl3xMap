@@ -10,7 +10,7 @@ class Spawn {
                 iconAnchor: [8, 8],
                 popupAnchor: [0, -10]
             })
-        }).bindPopup(world.display_name + " Spawn");
+        }).bindPopup(`${world.display_name} Spawn`);
     }
     show() {
         this.spawn.addTo(this.P.map);

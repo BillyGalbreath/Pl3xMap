@@ -16,7 +16,7 @@ class Pin {
     pin(pin) {
         this.pinned = pin;
         this.element.className = pin ? "pinned" : "unpinned";
-        this.element.src = "images/" + this.element.className + ".png";
+        this.element.src = `images/${this.element.className}.png`;
     }
 }
 

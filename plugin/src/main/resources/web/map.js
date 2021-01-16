@@ -118,7 +118,7 @@ class Pl3xMap {
         const zoom = this.map.getZoom();
         const x = Math.floor(center.x);
         const z = Math.floor(center.y);
-        return "?world=" + this.worldList.curWorld.name + "&zoom=" + zoom + "&x=" + x + "&z=" + z;
+        return `?world=${this.worldList.curWorld.name}&zoom=${zoom}&x=${x}&z=${z}`;
     }
     updateBrowserUrl(url) {
         window.history.replaceState(null, "", url);
