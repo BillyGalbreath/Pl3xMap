@@ -121,7 +121,7 @@ class Pl3xMap {
         return "?world=" + this.worldList.curWorld.name + "&zoom=" + zoom + "&x=" + x + "&z=" + z;
     }
     updateBrowserUrl(url) {
-        window.history.pushState(null, "", url);
+        window.history.replaceState(null, "", url);
     }
 }
 
