@@ -10,9 +10,7 @@ class World {
     }
     load(callback) {
         const P = this.P;
-        P.getJSON("tiles/" + this.name + "/settings.json", function (json) {
-            P.worldList.curWorld.__load(json, callback);
-        });
+        P.getJSON("tiles/" + this.name + "/settings.json", (json) => P.worldList.curWorld.__load(json, callback));
     }
     unload() {
         this.spawn.hide();

@@ -13,10 +13,10 @@ class Pl3xMap {
             attributionControl: false,
             noWrap: true
         })
-        .addEventListener('move', (event) => {
+        .addEventListener('move', () => {
             this.updateBrowserUrl(this.getUrlFromView());
         })
-        .addEventListener('zoom', (event) => {
+        .addEventListener('zoom', () => {
             this.updateBrowserUrl(this.getUrlFromView());
         });
 
@@ -34,17 +34,11 @@ class Pl3xMap {
         this.init();
     }
     tick() {
-        this.getJSON("tiles/players.json", function(json) {
-            P.playerList.update(json.players);
-        });
-        setTimeout(function() {
-            P.tick();
-        }, 1000);
+        this.getJSON("tiles/players.json", (json) => P.playerList.update(json.players));
+        setTimeout(() => P.tick(), 1000);
     }
     init() {
-        this.getJSON("tiles/settings.json", function(json) {
-            P.__init(json);
-        });
+        this.getJSON("tiles/settings.json", (json) => P.__init(json));
     }
     __init(json) {
         this.settings.ui = json.ui;
@@ -54,7 +48,7 @@ class Pl3xMap {
         if (P.settings.ui.coordinates) {
             new UICoordinates(this);
         }
-        this.worldList.loadWorld(this.getUrlParam("world", "world"), function(world) {
+        this.worldList.loadWorld(this.getUrlParam("world", "world"), (world) => {
             // setup view
             P.centerOn(P.getUrlParam("x", world.spawn.x),
                     P.getUrlParam("z", world.spawn.z),
