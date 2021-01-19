@@ -9,7 +9,7 @@ class Marker {
     init() {
         if (this.tooltip != null) {
             // use popup instead of tooltip (tooltips are mouse over, popups are on click)
-            this.marker.bindPopup(this.tooltip);
+            this.marker.bindPopup(() => this.tooltip);
         }
         for (const key in this.opts) {
             this.marker.options[key] = this.opts[key];
