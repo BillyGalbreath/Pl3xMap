@@ -168,4 +168,13 @@ public class WorldConfig extends AbstractWorldConfig {
         WORLDBORDER_MARKER_Z_INDEX = getInt("map.markers.world-border.z-index", WORLDBORDER_MARKER_Z_INDEX);
     }
 
+    public VisibilityLimit VISIBILITY_LIMIT = new VisibilityLimit();
+
+    private void visibilityLimitSettings() {
+        VISIBILITY_LIMIT.enabled = getBoolean("map.visibility-limit.enabled", VISIBILITY_LIMIT.enabled);
+        VISIBILITY_LIMIT.setRadius(getInt("map.visibility-limit.radius", VISIBILITY_LIMIT.getRadius()));
+        VISIBILITY_LIMIT.centerX = getInt("map.visibility-limit.center-x", VISIBILITY_LIMIT.centerX);
+        VISIBILITY_LIMIT.centerZ = getInt("map.visibility-limit.center-z", VISIBILITY_LIMIT.centerZ);
+    }
+
 }

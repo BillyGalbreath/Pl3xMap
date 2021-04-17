@@ -163,7 +163,9 @@ public final class MapWorld implements net.pl3x.map.api.MapWorld {
     }
 
     public void chunkModified(final @NonNull ChunkCoordinate coord) {
-        this.modifiedChunks.add(coord);
+        if (this.config().VISIBILITY_LIMIT.shouldRenderChunk(coord)) {
+            this.modifiedChunks.add(coord);
+        }
     }
 
     public boolean hasModifiedChunks() {
