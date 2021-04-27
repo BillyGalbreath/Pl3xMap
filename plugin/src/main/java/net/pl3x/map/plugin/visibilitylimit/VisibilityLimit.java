@@ -61,6 +61,16 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
         }
     }
     
+    @Override
+    public @NonNull List<VisibilityShape> getShapes() {
+        return this.shapes;
+    }
+
+    @Override
+    public boolean isWithinLimit(int blockX, int blockZ) {
+        return this.shouldRenderColumn(blockX, blockZ);
+    }
+
     public void parse(List<Map<String, Object>> configLimits) {
         this.shapes .clear();
         for (Map<String, Object> visibilityLimit : configLimits) {
@@ -78,10 +88,16 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
         }
     }
 
-    private void parseWorldBorderShape(Map<String, Object> visibilityLimit) {
-        Object enabled = visibilityLimit.get("enabled");
-        if (enabled != null && enabled.equals(Boolean.TRUE)) {
-            this.shapes.add(new WorldBorderShape());
+    private void parseCircleShape(Map<String, Object> visibilityLimit) {
+        if (visibilityLimit.get("center-x") instanceof Number
+                && visibilityLimit.get("center-z") instanceof Number
+                && visibilityLimit.get("radius") instanceof Number) {
+            int centerX = ((Number) visibilityLimit.get("center-x")).intValue();
+            int centerZ = ((Number) visibilityLimit.get("center-z")).intValue();
+            int radius = ((Number) visibilityLimit.get("radius")).intValue();
+            if (radius > 0) {
+                this.shapes.add(new CircleShape(centerX, centerZ, radius));
+            }
         }
     }
 
@@ -100,17 +116,15 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
         }
     }
 
-    private void parseCircleShape(Map<String, Object> visibilityLimit) {
-        if (visibilityLimit.get("center-x") instanceof Number
-                && visibilityLimit.get("center-z") instanceof Number
-                && visibilityLimit.get("radius") instanceof Number) {
-            int centerX = ((Number) visibilityLimit.get("center-x")).intValue();
-            int centerZ = ((Number) visibilityLimit.get("center-z")).intValue();
-            int radius = ((Number) visibilityLimit.get("radius")).intValue();
-            if (radius > 0) {
-                this.shapes.add(new CircleShape(centerX, centerZ, radius));
-            }
+    private void parseWorldBorderShape(Map<String, Object> visibilityLimit) {
+        Object enabled = visibilityLimit.get("enabled");
+        if (enabled != null && enabled.equals(Boolean.TRUE)) {
+            this.shapes.add(new WorldBorderShape());
         }
+    }
+
+    public boolean shouldRenderChunk(ChunkCoordinate chunkCoord) {
+        return this.shouldRenderChunk(chunkCoord.getX(), chunkCoord.getZ());
     }
 
     public boolean shouldRenderChunk(int chunkX, int chunkZ) {
@@ -125,11 +139,6 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
         return false;
     }
 
-    @Override
-    public @NonNull List<VisibilityShape> getShapes() {
-        return this.shapes;
-    }
-
     public boolean shouldRenderColumn(int blockX, int blockZ) {
         if (this.shapes.size() == 0) {
             return true;
@@ -140,10 +149,6 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
             }
         }
         return false;
-    }
-
-    public boolean shouldRenderRegion(Region region) {
-        return shouldRenderRegion(region.getX(), region.getZ());
     }
 
     private boolean shouldRenderRegion(int regionX, int regionZ) {
@@ -158,13 +163,8 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
         return false;
     }
 
-    public boolean shouldRenderChunk(ChunkCoordinate chunkCoord) {
-        return this.shouldRenderChunk(chunkCoord.getX(), chunkCoord.getZ());
-    }
-
-    @Override
-    public boolean isWithinLimit(int blockX, int blockZ) {
-        return this.shouldRenderColumn(blockX, blockZ);
+    public boolean shouldRenderRegion(Region region) {
+        return shouldRenderRegion(region.getX(), region.getZ());
     }
 
 
