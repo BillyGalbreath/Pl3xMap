@@ -3,13 +3,13 @@ package net.pl3x.map.plugin.task.render;
 import net.kyori.adventure.text.minimessage.Template;
 import net.pl3x.map.plugin.Logger;
 import net.pl3x.map.plugin.configuration.Lang;
-import net.pl3x.map.plugin.configuration.VisibilityLimit;
-import net.pl3x.map.plugin.configuration.WorldConfig;
 import net.pl3x.map.plugin.data.MapWorld;
 import net.pl3x.map.plugin.data.Region;
 import net.pl3x.map.plugin.util.FileUtil;
 import net.pl3x.map.plugin.util.Numbers;
 import net.pl3x.map.plugin.util.iterator.RegionSpiralIterator;
+import net.pl3x.map.plugin.visibilitylimit.VisibilityLimit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -86,7 +86,7 @@ public final class FullRender extends AbstractRender {
         // ensure task wasnt cancelled before we start
         if (this.cancelled) return;
 
-        VisibilityLimit visibility = this.mapWorld.config().VISIBILITY_LIMIT;
+        VisibilityLimit visibility = this.mapWorld.visibilityLimit();
         this.totalRegions = regions.size();
         this.totalChunks = regions.keySet().stream().mapToInt(visibility::countChunksInRegion).sum();
 
@@ -112,7 +112,7 @@ public final class FullRender extends AbstractRender {
     }
 
     private int countCompletedChunks(Map<Region, Boolean> regions) {
-        VisibilityLimit visibility = this.mapWorld.config().VISIBILITY_LIMIT;
+        VisibilityLimit visibility = this.mapWorld.visibilityLimit();
         return (int) regions.entrySet().stream()
                 .filter(entry -> entry.getValue())
                 .mapToInt(entry -> visibility.countChunksInRegion(entry.getKey()))
@@ -142,7 +142,7 @@ public final class FullRender extends AbstractRender {
                 Region region = new Region(x, z);
 
                 // ignore regions completely outside the visibility limit
-                if (!WorldConfig.get(world).VISIBILITY_LIMIT.shouldRenderRegion(region)) {
+                if (!mapWorld.visibilityLimit().shouldRenderRegion(region)) {
                     continue;
                 }
 

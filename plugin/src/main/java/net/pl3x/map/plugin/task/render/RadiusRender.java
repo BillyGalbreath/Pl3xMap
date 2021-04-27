@@ -6,12 +6,13 @@ import net.kyori.adventure.text.minimessage.Template;
 import net.pl3x.map.plugin.Logger;
 import net.pl3x.map.plugin.Pl3xMapPlugin;
 import net.pl3x.map.plugin.configuration.Lang;
-import net.pl3x.map.plugin.configuration.VisibilityLimit;
 import net.pl3x.map.plugin.data.ChunkCoordinate;
 import net.pl3x.map.plugin.data.Image;
 import net.pl3x.map.plugin.data.Region;
 import net.pl3x.map.plugin.util.Numbers;
 import net.pl3x.map.plugin.util.iterator.ChunkSpiralIterator;
+import net.pl3x.map.plugin.visibilitylimit.VisibilityLimit;
+
 import org.bukkit.Location;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -35,7 +36,7 @@ public final class RadiusRender extends AbstractRender {
 
     private int countTotalChunks() {
         int count = 0;
-        VisibilityLimit visibility = this.mapWorld.config().VISIBILITY_LIMIT;
+        VisibilityLimit visibility = this.mapWorld.visibilityLimit();
         for (int chunkX = this.centerX - this.radius; chunkX <= this.centerX + this.radius; chunkX++) {
             for (int chunkZ = this.centerZ - this.radius; chunkZ <= this.centerZ + this.radius; chunkZ++) {
                 if (visibility.shouldRenderChunk(chunkX, chunkZ)) {
@@ -71,7 +72,7 @@ public final class RadiusRender extends AbstractRender {
             final Region region = chunkCoord.regionCoordinate();
 
             // ignore chunks within the radius that are outside the visibility limit
-            if (!mapWorld.config().VISIBILITY_LIMIT.shouldRenderChunk(chunkCoord)) {
+            if (!mapWorld.visibilityLimit().shouldRenderChunk(chunkCoord)) {
                 continue;
             }
 

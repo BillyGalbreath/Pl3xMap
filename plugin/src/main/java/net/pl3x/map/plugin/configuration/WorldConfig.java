@@ -1,11 +1,19 @@
 package net.pl3x.map.plugin.configuration;
 
+import com.google.common.collect.ImmutableMap;
+
 import net.minecraft.server.v1_16_R3.MathHelper;
+import net.pl3x.map.api.visibilitylimit.VisibilityShape;
+import net.pl3x.map.plugin.visibilitylimit.VisibilityLimit;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -168,13 +176,12 @@ public class WorldConfig extends AbstractWorldConfig {
         WORLDBORDER_MARKER_Z_INDEX = getInt("map.markers.world-border.z-index", WORLDBORDER_MARKER_Z_INDEX);
     }
 
-    public VisibilityLimit VISIBILITY_LIMIT = new VisibilityLimit();
+    public List<Map<String, Object>> VISIBILITY_LIMITS = new ArrayList<>();
 
+    @SuppressWarnings("unchecked") // Safe, as YAML can only store dicts of <String, object>
     private void visibilityLimitSettings() {
-        VISIBILITY_LIMIT.enabled = getBoolean("map.visibility-limit.enabled", VISIBILITY_LIMIT.enabled);
-        VISIBILITY_LIMIT.setRadius(getInt("map.visibility-limit.radius", VISIBILITY_LIMIT.getRadius()));
-        VISIBILITY_LIMIT.centerX = getInt("map.visibility-limit.center-x", VISIBILITY_LIMIT.centerX);
-        VISIBILITY_LIMIT.centerZ = getInt("map.visibility-limit.center-z", VISIBILITY_LIMIT.centerZ);
+        VISIBILITY_LIMITS = (List<Map<String, Object>>) this.getList("map.visibility-limits", Arrays.asList(
+                ImmutableMap.of("type", "world-border", "enabled", false)));
     }
 
 }

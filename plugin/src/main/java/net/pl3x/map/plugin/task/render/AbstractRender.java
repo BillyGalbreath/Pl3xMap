@@ -19,7 +19,6 @@ import net.minecraft.server.v1_16_R3.WorldServer;
 import net.pl3x.map.api.Pair;
 import net.pl3x.map.plugin.Logger;
 import net.pl3x.map.plugin.configuration.Lang;
-import net.pl3x.map.plugin.configuration.VisibilityLimit;
 import net.pl3x.map.plugin.data.BiomeColors;
 import net.pl3x.map.plugin.data.ChunkCoordinate;
 import net.pl3x.map.plugin.data.Image;
@@ -28,6 +27,8 @@ import net.pl3x.map.plugin.data.Region;
 import net.pl3x.map.plugin.util.Colors;
 import net.pl3x.map.plugin.util.FileUtil;
 import net.pl3x.map.plugin.util.Numbers;
+import net.pl3x.map.plugin.visibilitylimit.VisibilityLimit;
+
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -150,7 +151,7 @@ public abstract class AbstractRender implements Runnable {
             int[] lastY = new int[16];
             for (int chunkZ = startChunkZ; chunkZ < startChunkZ + 32; chunkZ++) {
                 if (this.cancelled) return;
-                if (!this.mapWorld.config().VISIBILITY_LIMIT.shouldRenderChunk(chunkX, chunkZ)) {
+                if (!this.mapWorld.visibilityLimit().shouldRenderChunk(chunkX, chunkZ)) {
                     // skip rendering this chunk in the chunk column - it's outside the visibility limit
                     // (this chunk was already excluded from the chunk count, so not incrementing that is on purpose)
                     continue;
@@ -216,7 +217,7 @@ public abstract class AbstractRender implements Runnable {
         }
         final int blockX = chunk.getPos().getBlockX();
         final int blockZ = chunk.getPos().getBlockZ();
-        VisibilityLimit limit = mapWorld.config().VISIBILITY_LIMIT;
+        VisibilityLimit limit = mapWorld.visibilityLimit();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 if (cancelled) return;
