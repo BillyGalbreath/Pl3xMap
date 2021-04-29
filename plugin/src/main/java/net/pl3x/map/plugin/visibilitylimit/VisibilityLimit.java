@@ -72,7 +72,7 @@ public final class VisibilityLimit implements net.pl3x.map.api.visibilitylimit.V
     }
 
     public void parse(List<Map<String, Object>> configLimits) {
-        this.shapes .clear();
+        this.shapes.clear();
         for (Map<String, Object> visibilityLimit : configLimits) {
             Object type = visibilityLimit.get("type");
             if (type == null) {
