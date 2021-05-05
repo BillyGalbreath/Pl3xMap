@@ -85,8 +85,9 @@ class PlayerList {
 	// First tick: Are we tracking someone by url parameter?
         if (this.firstTick) {
             this.firstTick = false;
-            if (P.getUrlParam("uuid", null) != null) {
-                this.followPlayerMarker(P.getUrlParam("uuid", null));
+            const trackedUuid = P.getUrlParam("uuid", null);
+            if (trackedUuid != null && this.players.get(trackedUuid) != null) {
+                this.followPlayerMarker(trackedUuid);
             }
         }
 
