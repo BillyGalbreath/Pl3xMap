@@ -126,8 +126,8 @@ class Pl3xMap {
         const zoom = this.map.getZoom();
         const x = Math.floor(center.x);
         const z = Math.floor(center.y);
-        const followedPlayer = this.playerList.getFollowedPlayer();
-        return `?world=${this.worldList.curWorld.name}&zoom=${zoom}&x=${x}&z=${z}${(followedPlayer ? `&uuid=${followedPlayer}` : '' )}`;
+        const following = this.playerList.following ? `&uuid=${this.playerList.following}` : '';
+        return `?world=${this.worldList.curWorld.name}&zoom=${zoom}&x=${x}&z=${z}${following}`;
     }
     updateBrowserUrl(url) {
         window.history.replaceState(null, "", url);

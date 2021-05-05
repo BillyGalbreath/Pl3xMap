@@ -82,12 +82,14 @@ class PlayerList {
             this.removeFromList(player);
         }
 
-	// First tick: Are we tracking someone by url parameter?
+        // first tick only
         if (this.firstTick) {
             this.firstTick = false;
-            const trackedUuid = P.getUrlParam("uuid", null);
-            if (trackedUuid != null && this.players.get(trackedUuid) != null) {
-                this.followPlayerMarker(trackedUuid);
+
+            // follow uuid from url
+            const follow = P.getUrlParam("uuid", null);
+            if (follow != null && this.players.get(follow) != null) {
+                this.followPlayerMarker(follow);
             }
         }
 
@@ -119,10 +121,6 @@ class PlayerList {
             this.following = uuid;
             document.getElementById(this.following).classList.add("following");
         }
-    }
-
-    getFollowedPlayer() {
-        return this.following;
     }
 }
 
