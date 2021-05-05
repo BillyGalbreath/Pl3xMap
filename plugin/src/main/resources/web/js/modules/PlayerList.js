@@ -6,6 +6,7 @@ class PlayerList {
         this.players = new Map();
         this.markers = new Map();
         this.following = null;
+        this.firstTick = true;
         this.label = json.player_list_label;
         P.map.createPane("nameplate").style.zIndex = 1000;
     }
@@ -79,6 +80,14 @@ class PlayerList {
         for (let i = 0; i < playersToRemove.length; i++) {
             const player = this.players.get(playersToRemove[i]);
             this.removeFromList(player);
+        }
+
+	// First tick: Are we tracking someone by url parameter?
+        if (this.firstTick) {
+            this.firstTick = false;
+            if (P.getUrlParam("uuid", null) != null) {
+                this.followPlayerMarker(P.getUrlParam("uuid", null));
+            }
         }
 
         // follow highlighted player
