@@ -119,6 +119,10 @@ class PlayerList {
             document.getElementById(this.following).classList.add("following");
         }
     }
+
+    getFollowedPlayer() {
+        return this.following;
+    }
 }
 
 export { PlayerList };
