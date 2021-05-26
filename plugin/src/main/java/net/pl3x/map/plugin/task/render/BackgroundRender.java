@@ -53,7 +53,7 @@ public final class BackgroundRender extends AbstractRender {
         });
         if (!futures.isEmpty()) {
             CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new)).join();
-            Logger.info(String.format("Finished background render cycle in %.2f seconds",
+            Logger.debug(String.format("Finished background render cycle in %.2f seconds",
                     (double) (System.currentTimeMillis() - time) / 1000.0D));
         }
     }
