@@ -127,6 +127,9 @@ public class WorldConfig extends AbstractWorldConfig {
     public boolean PLAYER_TRACKER_NAMEPLATE_SHOW_HEALTH = true;
     public boolean PLAYER_TRACKER_HIDE_INVISIBLE = true;
     public boolean PLAYER_TRACKER_HIDE_SPECTATORS = true;
+    public boolean PLAYER_TRACKER_HIDE_UNDERGROUND = false;
+    public int PLAYER_TRACKER_HIDE_UNDERGROUND_LEVEL = 60;
+    public boolean PLAYER_TRACKER_HIDE_SNEAKING = false;
 
     private void playerTrackerSettings() {
         PLAYER_TRACKER_ENABLED = getBoolean("player-tracker.enabled", PLAYER_TRACKER_ENABLED);
@@ -142,6 +145,9 @@ public class WorldConfig extends AbstractWorldConfig {
         PLAYER_TRACKER_NAMEPLATE_SHOW_HEALTH = getBoolean("player-tracker.nameplate.show-health", PLAYER_TRACKER_NAMEPLATE_SHOW_HEALTH);
         PLAYER_TRACKER_HIDE_INVISIBLE = getBoolean("player-tracker.hide.invisible", PLAYER_TRACKER_HIDE_INVISIBLE);
         PLAYER_TRACKER_HIDE_SPECTATORS = getBoolean("player-tracker.hide.spectators", PLAYER_TRACKER_HIDE_SPECTATORS);
+        PLAYER_TRACKER_HIDE_UNDERGROUND = getBoolean("player-tracker.hide.underground", PLAYER_TRACKER_HIDE_UNDERGROUND);
+        PLAYER_TRACKER_HIDE_UNDERGROUND_LEVEL = getInt("player-tracker.hide.underground-level", PLAYER_TRACKER_HIDE_UNDERGROUND_LEVEL);
+        PLAYER_TRACKER_HIDE_SNEAKING = getBoolean("player-tracker.hide.sneaking", PLAYER_TRACKER_HIDE_SNEAKING);
     }
 
     public int MARKER_API_UPDATE_INTERVAL_SECONDS = 5;

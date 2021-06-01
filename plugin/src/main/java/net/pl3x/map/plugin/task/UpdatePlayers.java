@@ -39,6 +39,12 @@ public class UpdatePlayers extends BukkitRunnable {
                 if (worldConfig.PLAYER_TRACKER_HIDE_INVISIBLE && player.isInvisible()) {
                     return;
                 }
+                if (worldConfig.PLAYER_TRACKER_HIDE_UNDERGROUND && world.getHighestBlockAt(player.getLocation()).getY() > player.getLocation().getY() && player.getLocation().getY() < worldConfig.PLAYER_TRACKER_HIDE_UNDERGROUND_LEVEL) {
+                    return;
+                }
+                if (worldConfig.PLAYER_TRACKER_HIDE_SNEAKING && player.isSneaking()) {
+                    return;
+                }
                 if (this.plugin.playerManager().hidden(player)) {
                     return;
                 }
