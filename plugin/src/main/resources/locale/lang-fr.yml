@@ -22,18 +22,18 @@ command:
     confirmation-required: <red>Une confirmation est demandée. Confirmer ceci avec /<command> confirm.
     no-pending-commands: <red>Vous n'avez aucune commande en attente.
   description:
-    help: Obtenir de l'aide pour les commandes Pl3xmap 
-    resetmap: Réinitialiser la carte d'un monde spécifié 
+    help: Obtenir de l'aide pour les commandes Pl3xmap
+    resetmap: Réinitialiser la carte d'un monde spécifié
     confirm: Confirmer une commande en attente
     reload: Recharger le plugin
-    full-render: Démarrer un rendu complet pour le monde spécifié 
-    cancel-render: Annuler un rendu pour le monde spécifié 
+    full-render: Démarrer un rendu complet pour le monde spécifié
+    cancel-render: Annuler un rendu pour le monde spécifié
     pause-render: Suspendre tous les rendus pour le monde spécifié
-    radius-render: Démarrer un rendu de rayon 
+    radius-render: Démarrer un rendu de rayon
     hide: Masquer un joueur sur la carte
     show: Montrer un joueur sur la carte
   argument:
-    optional-world: Par défaut le monde actuel des joueurs s'il n'est pas fourni 
+    optional-world: Par défaut le monde actuel des joueurs s'il n'est pas fourni
     optional-center: Par défaut à (<white>0<gray>,</gray> 0</white>) si non spécifié 
     optional-player: Par défaut le joueur en cours d'exécution si non spécifié (par la console
       vous devez spécifier un joueur)
