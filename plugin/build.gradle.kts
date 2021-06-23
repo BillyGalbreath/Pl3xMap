@@ -2,6 +2,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("net.minecrell.plugin-yml.bukkit") version "0.4.0"
     id("xyz.jpenilla.run-paper") version "1.0.3"
+    id("xyz.jpenilla.special-gradle") version "1.0.0-SNAPSHOT"
 }
 
 dependencies {
@@ -12,17 +13,15 @@ dependencies {
     implementation("net.kyori", "adventure-text-minimessage", "4.1.0-SNAPSHOT")
     implementation("io.undertow", "undertow-core", "2.2.3.Final")
     implementation("org.bstats", "bstats-bukkit", "2.2.1")
-    compileOnly("io.papermc.paper", "paper", "1.17-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper", "paper", "1.17-R0.1-SNAPSHOT", classifier = "mojang-mapped")
 }
 
 tasks {
-    jar {
-        archiveClassifier.set("unshaded")
+    productionMappedJar {
+        archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
     }
     shadowJar {
-        archiveClassifier.set(null as String?)
-        archiveFileName.set("${rootProject.name}-${rootProject.version}.jar")
-        destinationDirectory.set(rootProject.rootDir.resolve("build").resolve("libs"))
+        archiveClassifier.set("dev-all")
         from(rootProject.projectDir.resolve("LICENSE"))
         minimize {
             exclude { it.moduleName == "pl3xmap-api" }
@@ -36,11 +35,23 @@ tasks {
         ).forEach { relocate(it, "${rootProject.group}.plugin.lib.$it") }
     }
     build {
-        dependsOn(shadowJar)
+        dependsOn(productionMappedJar)
     }
     runServer {
         minecraftVersion("1.17")
+        pluginJars.from(productionMappedJar.flatMap { it.archiveFile })
     }
+}
+
+runPaper {
+    disablePluginJarDetection()
+}
+
+specialGradle {
+    injectRepositories.set(false)
+    injectSpigotDependency.set(false)
+    minecraftVersion.set("1.17")
+    specialSourceVersion.set("1.10.0")
 }
 
 bukkit {
