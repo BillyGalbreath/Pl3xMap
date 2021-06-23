@@ -5,6 +5,12 @@ dependencyResolutionManagement {
         maven("https://papermc.io/repo/repository/maven-public/")
         maven("https://repo.incendo.org/content/repositories/snapshots/")
         maven("https://repo.codemc.org/repository/maven-public/")
+        maven("https://maven.quiltmc.org/repository/release/") {
+            mavenContent {
+                releasesOnly()
+                includeModule("org.quiltmc", "tiny-remapper")
+            }
+        }
         mavenLocal()
     }
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -13,7 +19,7 @@ dependencyResolutionManagement {
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        maven("https://repo.jpenilla.xyz/snapshots/")
+        maven("https://papermc.io/repo/repository/maven-public/")
     }
 }
 
