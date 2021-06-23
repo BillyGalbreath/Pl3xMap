@@ -1,6 +1,7 @@
 package net.pl3x.map.plugin.task.render;
 
 import com.mojang.datafixers.util.Either;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +37,16 @@ import net.pl3x.map.plugin.data.Region;
 import net.pl3x.map.plugin.util.Colors;
 import net.pl3x.map.plugin.util.FileUtil;
 import net.pl3x.map.plugin.util.Numbers;
+import net.pl3x.map.plugin.util.ReflectionUtil;
+import org.apache.logging.log4j.LogManager;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 public abstract class AbstractRender implements Runnable {
+    private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
+
     private final ExecutorService executor;
     private final FutureTask<Void> futureTask;
     protected volatile boolean cancelled = false;
@@ -136,6 +141,10 @@ public abstract class AbstractRender implements Runnable {
         }
         CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new))
                 .whenComplete((result, throwable) -> {
+                    if (throwable != null) {
+                        LOGGER.warn("Exception mapping region!", throwable);
+                        return;
+                    }
                     if (!this.cancelled) {
                         this.mapWorld.saveImage(image);
                     }
@@ -170,7 +179,10 @@ public abstract class AbstractRender implements Runnable {
                 }
                 curChunks.incrementAndGet();
             }
-        }, this.executor);
+        }, this.executor).exceptionally(thr -> {
+            LOGGER.warn("mapChunkColumn failed!", thr);
+            return null;
+        });
     }
 
     protected final @NonNull CompletableFuture<Void> mapSingleChunk(final @NonNull Image image, final int chunkX, final int chunkZ) {
@@ -205,7 +217,10 @@ public abstract class AbstractRender implements Runnable {
             }
 
             curChunks.incrementAndGet();
-        }, this.executor);
+        }, this.executor).exceptionally(thr -> {
+            LOGGER.warn("mapSingleChunk failed!", thr);
+            return null;
+        });
     }
 
     private void scanChunk(Image image, int[] lastY, LevelChunk chunk) {
@@ -323,10 +338,17 @@ public abstract class AbstractRender implements Runnable {
         return state;
     }
 
+    // SpecialSource fucks up the remap on this method
+    private static final Method setY = ReflectionUtil.needMethod(BlockPos.MutableBlockPos.class, "t", int.class);
+
     private @NonNull BlockState iterateUp(final @NonNull LevelChunk chunk, final BlockPos.@NonNull MutableBlockPos mutablePos) {
         BlockState state;
         int height = mutablePos.getY();
-        mutablePos.setY(0);
+        try {
+            setY.invoke(mutablePos, 0);
+        } catch (final ReflectiveOperationException ex) {
+            throw new RuntimeException("Failed to invoke setY", ex);
+        }
         if (chunk.getLevel().dimensionType().hasCeiling()) {
             do {
                 mutablePos.move(Direction.UP);
@@ -366,7 +388,11 @@ public abstract class AbstractRender implements Runnable {
             final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
             mutablePos.set(blockPos);
             do {
-                mutablePos.setY(yBelowSurface--);
+                try {
+                    setY.invoke(mutablePos, yBelowSurface--);
+                } catch (final ReflectiveOperationException ex) {
+                    throw new RuntimeException("Failed to invoke setY", ex);
+                }
                 fluidState = chunk.getBlockState(mutablePos);
                 ++fluidDepth;
             } while (yBelowSurface > 0 && fluidDepth <= 10 && !fluidState.getFluidState().isEmpty());
@@ -406,13 +432,21 @@ public abstract class AbstractRender implements Runnable {
         return Colors.shade(color, colorOffset);
     }
 
+    // SpecialSource fucks up the remap on this method
+    private static final Method getChunkSource = ReflectionUtil.needMethod(ServerLevel.class, "getChunkProvider");
+
     private net.minecraft.world.level.chunk.LevelChunk getChunkAt(ServerLevel world, int x, int z) {
-        ServerChunkCache provider = world.getChunkSource();
-        net.minecraft.world.level.chunk.LevelChunk ifLoaded = provider.getChunkAtIfLoadedImmediately(x, z);
+        final ServerChunkCache chunkCache;
+        try {
+            chunkCache = (ServerChunkCache) getChunkSource.invoke(world);
+        } catch (final ReflectiveOperationException ex) {
+            throw new RuntimeException("Failed to get ServerChunkCache for world: " + world.getWorld().getName(), ex);
+        }
+        net.minecraft.world.level.chunk.LevelChunk ifLoaded = chunkCache.getChunkAtIfLoadedImmediately(x, z);
         if (ifLoaded != null) {
             return ifLoaded;
         }
-        CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> future = provider.getChunkAtAsynchronously(x, z, false, true);
+        final CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> future = chunkCache.getChunkAtAsynchronously(x, z, false, true);
         while (!future.isDone()) {
             if (cancelled) return null;
         }
