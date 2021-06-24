@@ -1,7 +1,6 @@
 package net.pl3x.map.plugin.task.render;
 
 import com.mojang.datafixers.util.Either;
-import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +36,11 @@ import net.pl3x.map.plugin.data.Region;
 import net.pl3x.map.plugin.util.Colors;
 import net.pl3x.map.plugin.util.FileUtil;
 import net.pl3x.map.plugin.util.Numbers;
-import net.pl3x.map.plugin.util.ReflectionUtil;
 import org.apache.logging.log4j.LogManager;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-
-import static java.util.Objects.requireNonNull;
 
 public abstract class AbstractRender implements Runnable {
     private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
@@ -340,17 +336,10 @@ public abstract class AbstractRender implements Runnable {
         return state;
     }
 
-    // SpecialSource fucks up the remap on this method
-    private static final Method setY = ReflectionUtil.needMethod(
-            BlockPos.MutableBlockPos.class,
-            List.of("t", "setY"),
-            int.class
-    );
-
     private @NonNull BlockState iterateUp(final @NonNull LevelChunk chunk, final BlockPos.@NonNull MutableBlockPos mutablePos) {
         BlockState state;
         int height = mutablePos.getY();
-        ReflectionUtil.invokeOrThrow(setY, mutablePos, 0);
+        mutablePos.setY(0);
         if (chunk.getLevel().dimensionType().hasCeiling()) {
             do {
                 mutablePos.move(Direction.UP);
@@ -390,7 +379,7 @@ public abstract class AbstractRender implements Runnable {
             final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
             mutablePos.set(blockPos);
             do {
-                ReflectionUtil.invokeOrThrow(setY, mutablePos, yBelowSurface--);
+                mutablePos.setY(yBelowSurface--);
                 fluidState = chunk.getBlockState(mutablePos);
                 ++fluidDepth;
             } while (yBelowSurface > 0 && fluidDepth <= 10 && !fluidState.getFluidState().isEmpty());
@@ -430,14 +419,8 @@ public abstract class AbstractRender implements Runnable {
         return Colors.shade(color, colorOffset);
     }
 
-    // SpecialSource fucks up the remap on this method
-    private static final Method getChunkSource = ReflectionUtil.needMethod(
-            ServerLevel.class,
-            List.of("getChunkProvider", "getChunkSource")
-    );
-
     private net.minecraft.world.level.chunk.LevelChunk getChunkAt(ServerLevel world, int x, int z) {
-        final ServerChunkCache chunkCache = requireNonNull((ServerChunkCache) ReflectionUtil.invokeOrThrow(getChunkSource, world), "ServerChunkCache");
+        final ServerChunkCache chunkCache = world.getChunkSource();
         net.minecraft.world.level.chunk.LevelChunk ifLoaded = chunkCache.getChunkAtIfLoadedImmediately(x, z);
         if (ifLoaded != null) {
             return ifLoaded;
