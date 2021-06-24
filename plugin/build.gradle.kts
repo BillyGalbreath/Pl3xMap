@@ -34,6 +34,7 @@ dependencies {
 
 tasks {
     shadowJar {
+        archiveFileName.set("${rootProject.name}-${rootProject.version}-mojang-mapped.jar")
         archiveClassifier.set("mojang-mapped")
         from(rootProject.projectDir.resolve("LICENSE"))
         minimize {
