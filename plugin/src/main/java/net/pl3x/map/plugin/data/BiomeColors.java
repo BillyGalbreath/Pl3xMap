@@ -27,8 +27,9 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.Material;
 import net.pl3x.map.plugin.util.Colors;
 import net.pl3x.map.plugin.util.FileUtil;
-import net.pl3x.map.plugin.util.ReflectionUtil;
 import org.checkerframework.checker.nullness.qual.NonNull;
+
+import static net.pl3x.map.plugin.util.ReflectionUtil.needField;
 
 public final class BiomeColors {
     private static final Set<Block> grassColorBlocks = ImmutableSet.of(
@@ -236,10 +237,26 @@ public final class BiomeColors {
         private BiomeEffectsReflection() {
         }
 
-        private static final Field grass_color = ReflectionUtil.needField(BiomeSpecialEffects.class, "g");
-        private static final Field foliage_color = ReflectionUtil.needField(BiomeSpecialEffects.class, "f");
-        private static final Field water_color = ReflectionUtil.needField(BiomeSpecialEffects.class, "c");
-        private static final Field grass_color_modifier = ReflectionUtil.needField(BiomeSpecialEffects.class, "h");
+        private static final Field grass_color = needField(
+                BiomeSpecialEffects.class,
+                "g",
+                "grassColorOverride"
+        );
+        private static final Field foliage_color = needField(
+                BiomeSpecialEffects.class,
+                "f",
+                "foliageColorOverride"
+        );
+        private static final Field water_color = needField(
+                BiomeSpecialEffects.class,
+                "c",
+                "waterColor"
+        );
+        private static final Field grass_color_modifier = needField(
+                BiomeSpecialEffects.class,
+                "h",
+                "grassColorModifier"
+        );
 
         @SuppressWarnings("unchecked")
         private static @NonNull Optional<Integer> grassColor(final @NonNull Biome biome) {

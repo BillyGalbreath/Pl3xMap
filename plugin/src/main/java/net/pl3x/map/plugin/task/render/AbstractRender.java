@@ -44,6 +44,8 @@ import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import static java.util.Objects.requireNonNull;
+
 public abstract class AbstractRender implements Runnable {
     private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger();
 
@@ -339,16 +341,16 @@ public abstract class AbstractRender implements Runnable {
     }
 
     // SpecialSource fucks up the remap on this method
-    private static final Method setY = ReflectionUtil.needMethod(BlockPos.MutableBlockPos.class, "t", int.class);
+    private static final Method setY = ReflectionUtil.needMethod(
+            BlockPos.MutableBlockPos.class,
+            List.of("t", "setY"),
+            int.class
+    );
 
     private @NonNull BlockState iterateUp(final @NonNull LevelChunk chunk, final BlockPos.@NonNull MutableBlockPos mutablePos) {
         BlockState state;
         int height = mutablePos.getY();
-        try {
-            setY.invoke(mutablePos, 0);
-        } catch (final ReflectiveOperationException ex) {
-            throw new RuntimeException("Failed to invoke setY", ex);
-        }
+        ReflectionUtil.invokeOrThrow(setY, mutablePos, 0);
         if (chunk.getLevel().dimensionType().hasCeiling()) {
             do {
                 mutablePos.move(Direction.UP);
@@ -388,11 +390,7 @@ public abstract class AbstractRender implements Runnable {
             final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
             mutablePos.set(blockPos);
             do {
-                try {
-                    setY.invoke(mutablePos, yBelowSurface--);
-                } catch (final ReflectiveOperationException ex) {
-                    throw new RuntimeException("Failed to invoke setY", ex);
-                }
+                ReflectionUtil.invokeOrThrow(setY, mutablePos, yBelowSurface--);
                 fluidState = chunk.getBlockState(mutablePos);
                 ++fluidDepth;
             } while (yBelowSurface > 0 && fluidDepth <= 10 && !fluidState.getFluidState().isEmpty());
@@ -433,15 +431,13 @@ public abstract class AbstractRender implements Runnable {
     }
 
     // SpecialSource fucks up the remap on this method
-    private static final Method getChunkSource = ReflectionUtil.needMethod(ServerLevel.class, "getChunkProvider");
+    private static final Method getChunkSource = ReflectionUtil.needMethod(
+            ServerLevel.class,
+            List.of("getChunkProvider", "getChunkSource")
+    );
 
     private net.minecraft.world.level.chunk.LevelChunk getChunkAt(ServerLevel world, int x, int z) {
-        final ServerChunkCache chunkCache;
-        try {
-            chunkCache = (ServerChunkCache) getChunkSource.invoke(world);
-        } catch (final ReflectiveOperationException ex) {
-            throw new RuntimeException("Failed to get ServerChunkCache for world: " + world.getWorld().getName(), ex);
-        }
+        final ServerChunkCache chunkCache = requireNonNull((ServerChunkCache) ReflectionUtil.invokeOrThrow(getChunkSource, world), "ServerChunkCache");
         net.minecraft.world.level.chunk.LevelChunk ifLoaded = chunkCache.getChunkAtIfLoadedImmediately(x, z);
         if (ifLoaded != null) {
             return ifLoaded;
