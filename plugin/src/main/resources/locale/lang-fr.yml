@@ -61,12 +61,7 @@ log:
   cancelled-rendering: <dark_aqua>Le rendu de la map <yellow><world> <dark_aqua>a été intérrompu
   resumed-rendering: <dark_aqua>Le rendu de la map <yellow><world> <dark_aqua>a recontinuer
   scanning-region-progress: <gray>(</gray><yellow><percent></yellow><gray>)</gray> <dark_aqua>Monde<gray>:</gray> <yellow><world></yellow> Chunks<gray>:</gray> <yellow><current_chunks></yellow><gray>/</gray><yellow><total_chunks></yellow> Temps Ecoulé<gray>:</gray> <yellow><elapsed></yellow> ETA<gray>:</gray> <yellow><eta></yellow> Vitesse<gray>:</gray> <yellow><rate></yellow> cps
-  scanning-region-progress-with-regions: <gray>(</gray><yellow><percent></yellow><gray>)</gray>
-    <dark_aqua>Monde<gray>:</gray> <yellow><world></yellow> Regions<gray>:</gray>
-    <yellow><current_regions></yellow><gray>/</gray><yellow><total_regions></yellow>
-    Chunks<gray>:</gray> <yellow><current_chunks></yellow><gray>/</gray><yellow><total_chunks></yellow>
-    Temps Ecoulé<gray>:</gray> <yellow><elapsed></yellow> ETA<gray>:</gray> <yellow><eta></yellow>
-    Vitesse<gray>:</gray> <yellow><rate></yellow> cps
+  scanning-region-progress-with-regions: <gray>(</gray><yellow><percent></yellow><gray>)</gray> <dark_aqua>Monde<gray>:</gray> <yellow><world></yellow> Regions<gray>:</gray> <yellow><current_regions></yellow><gray>/</gray><yellow><total_regions></yellow> Chunks<gray>:</gray> <yellow><current_chunks></yellow><gray>/</gray><yellow><total_chunks></yellow> Temps Ecoulé<gray>:</gray> <yellow><elapsed></yellow> ETA<gray>:</gray> <yellow><eta></yellow> Vitesse<gray>:</gray> <yellow><rate></yellow> cps
   internal-web-disabled: <green>Le serveur Web interne est désactivé dans le fichier config.yml
   internal-web-started: <green>Le serveur Web interne fonctionne sur l'adresse <bind>:<port>
   internal-web-stopped: <green>Le serveur Web interne s'est arrêté
