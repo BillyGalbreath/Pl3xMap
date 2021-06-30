@@ -55,7 +55,7 @@ log:
   prefix: <dark_aqua>[<light_purple>Pl3xMap</light_purple>]</dark_aqua>
   started-full-render: <dark_aqua>Démarrage du rendu de la carte complète pour <yellow><world>
   started-radius-render: <dark_aqua>Rendu de la carte de rayon démarré pour <yellow><world>
-  scanning-region-files: <yellow>Numérisation des fichiers de région... (this may take a moment)
+  scanning-region-files: <yellow>Numérisation des fichiers de région... (cela peut prendre un moment)
   found-total-region-files: <green>Fichiers Région <gray><total> <green>trouvé
   finished-rendering: <dark_aqua>Carte de rendu terminée pour <yellow><world>
   cancelled-rendering: <dark_aqua>Le rendu de la map <yellow><world> <dark_aqua>a été intérrompu
