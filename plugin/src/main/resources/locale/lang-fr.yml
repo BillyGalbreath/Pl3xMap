@@ -14,8 +14,7 @@ command:
   message:
     console-must-specify-player: <red>Vous devez spécifier un joueur pour exécuter la commande par la console
     player-not-found-for-input: <red>Aucun joueur n'a été trouvé avec les arguments '<input>'
-    console-must-specify-world: <red>Vous devez spécifier un monde pour exécuter
-      la commande par la console
+    console-must-specify-world: <red>Vous devez spécifier un monde pour exécuter la commande par la console
     no-such-world: <red>Pas un tel monde '<world>'
     map-not-enabled-for-world: <red>La map n'est pas activé pour le monde '<world>'
     confirmation-required: <red>Une confirmation est demandée. Confirmer ceci avec /<command> confirm.
