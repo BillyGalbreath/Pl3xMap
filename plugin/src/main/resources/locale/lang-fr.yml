@@ -33,8 +33,7 @@ command:
   argument:
     optional-world: Par défaut le monde actuel des joueurs s'il n'est pas fourni
     optional-center: Par défaut à (<white>0<gray>,</gray> 0</white>) si non spécifié
-    optional-player: Par défaut le joueur en cours d'exécution si non spécifié (par la console
-      vous devez spécifier un joueur)
+    optional-player: Par défaut le joueur en cours d'exécution si non spécifié (par la console vous devez spécifier un joueur)
     help-query: Aide Query
   hide:
     already-hidden: <red><player> est déjà caché sur la carte
