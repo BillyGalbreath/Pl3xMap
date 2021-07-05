@@ -40,7 +40,7 @@ Join us on [Discord](https://discord.gg/B8WpDPXeBh) in the #pl3xmap channel
 
 Downloads can be obtained from the [jenkins server](https://ci.pl3x.net/job/Pl3xMap).
 * [1.17](https://ci.pl3x.net/job/Pl3xMap) builds 138+
-* [1.16.5](https://ci.pl3x.net/job/Pl3xMap/137/artifact/build/libs/Pl3xMap-1.0.0-BETA-137.jar) builds 137 and below
+* [1.16.5](https://ci.pl3x.net/job/Pl3xMap/137/) builds 137 and below
 
 ## Servers Using Pl3xMap
 
