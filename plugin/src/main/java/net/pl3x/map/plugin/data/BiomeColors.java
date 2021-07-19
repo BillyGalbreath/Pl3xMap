@@ -163,19 +163,47 @@ public final class BiomeColors {
     }
 
     private int grassColorSampler(final @NonNull Biome biome, final @NonNull BlockPos pos) {
-        return modifiedGrassColor(biome, pos, this.grassColors.get(biome));
+        try {
+            return modifiedGrassColor(biome, pos, this.grassColors.get(biome));
+        } catch (NullPointerException exception) {
+            for (Map.Entry<Biome, Integer> biomeIntegerEntry: this.grassColors.entrySet()) {
+                if (biomeIntegerEntry.getKey().getBiomeCategory().getSerializedName().equalsIgnoreCase(biome.getBiomeCategory().getSerializedName())) {
+                    return modifiedGrassColor(biome, pos, biomeIntegerEntry.getValue());
+                }
+            }
+            return 0;
+        }
     }
 
     private int foliage(final @NonNull BlockPos pos) {
         if (world.config().MAP_BIOMES_BLEND > 0) {
-            return this.sampleNeighbors(pos, world.config().MAP_BIOMES_BLEND, (biome, b) -> this.foliageColors.get(biome));
+            return this.sampleNeighbors(pos, world.config().MAP_BIOMES_BLEND, (biome, b) -> {
+                if (this.foliageColors.get(biome) == null) {
+                    for (Map.Entry<Biome, Integer> biomeIntegerEntry: this.foliageColors.entrySet()) {
+                        if (biomeIntegerEntry.getKey().getBiomeCategory().getSerializedName().equalsIgnoreCase(biome.getBiomeCategory().getSerializedName())) {
+                            return biomeIntegerEntry.getValue();
+                        }
+                    }
+                }
+                return this.foliageColors.get(biome);
+            });
         }
         return this.foliageColors.get(this.getBiomeWithCaching(pos));
     }
 
     private int water(final @NonNull BlockPos pos) {
         if (world.config().MAP_BIOMES_BLEND > 0) {
-            return this.sampleNeighbors(pos, world.config().MAP_BIOMES_BLEND, (biome, b) -> this.waterColors.get(biome));
+            return this.sampleNeighbors(pos, world.config().MAP_BIOMES_BLEND, (biome, b) -> {
+                if (this.waterColors.get(biome) == null) {
+                    for (Map.Entry<Biome, Integer> biomeIntegerEntry: this.waterColors.entrySet()) {
+                        if (biomeIntegerEntry.getKey().getBiomeCategory().getSerializedName().equalsIgnoreCase(biome.getBiomeCategory().getSerializedName())) {
+                            return biomeIntegerEntry.getValue();
+                        }
+                    }
+                }
+
+                return this.waterColors.get(biome);
+            });
         }
         return this.waterColors.get(this.getBiomeWithCaching(pos));
     }
