@@ -163,16 +163,14 @@ public final class BiomeColors {
     }
 
     private int grassColorSampler(final @NonNull Biome biome, final @NonNull BlockPos pos) {
-        try {
-            return modifiedGrassColor(biome, pos, this.grassColors.get(biome));
-        } catch (NullPointerException exception) {
+        if (this.grassColors.get(biome) == null) {
             for (Map.Entry<Biome, Integer> biomeIntegerEntry: this.grassColors.entrySet()) {
                 if (biomeIntegerEntry.getKey().getBiomeCategory().getSerializedName().equalsIgnoreCase(biome.getBiomeCategory().getSerializedName())) {
                     return modifiedGrassColor(biome, pos, biomeIntegerEntry.getValue());
                 }
             }
-            return 0;
         }
+        return modifiedGrassColor(biome, pos, this.grassColors.get(biome));
     }
 
     private int foliage(final @NonNull BlockPos pos) {
