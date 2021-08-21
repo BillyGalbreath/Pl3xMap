@@ -9,7 +9,6 @@ These plugins have direct integrations with Pl3xMap.
 | LandClaims v1.16.5+  | [Source](https://github.com/pl3xgaming/LandClaims/)                |
 | Residence 5.0.0.2+  | [Download](https://www.spigotmc.org/resources/residence.11480/)     |
 
-
 ## Addons
 
 These plugins are add-ons for Pl3xMap.
