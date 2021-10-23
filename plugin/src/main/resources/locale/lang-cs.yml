@@ -1,0 +1,70 @@
+# Translators: [Thesoreon]
+
+render-in-progress: <red>Render již probíhá pro <world>
+render-not-in-progress: <red>Žádný render neprobíhá pro <world>
+cancelled-render: <green>Render zrušen pro <world>
+successfully-reset-map: <green>Mapa byla úspěšně vyresetována pro <world>
+paused-renders: <green>Zastavený render mapy <world>
+unpaused-renders: <green>Obnoven render mapy <world>
+click-for-help: Klikni pro nápovědu
+plugin-reloaded: <green><name> v<version> znovu načten
+command:
+  prefix: "<white>[<gradient:#C028FF:#5B00FF>Pl3xMap</gradient>]</white> "
+  message:
+    console-must-specify-player: <red>Musíte specifikovat cílového hráče při provádění příkazu z konzole
+    player-not-found-for-input: <red>Nebyl nalezen žádný hráč odpovídající '<input>'
+    console-must-specify-world: <red>Musíte specifikovat svět při provádění příkazu z konzole
+    no-such-world: <red>Nenalezen svět '<world>'
+    map-not-enabled-for-world: <red>Mapa není zapnutá pro svět '<world>'
+    confirmation-required: <red>Potvrzení vyžádováno. Potvrďte pomocí /<command> confirm.
+    no-pending-commands: <red>Nejsou žádné nevyřízené potvrzení
+  description:
+    help: Nápověda pro Pl3xmap příkazy
+    resetmap: Vyresetuje mapu pro daný svět
+    confirm: Potvrdí nevyřízené příkazy
+    reload: Znovu načte plugin
+    full-render: Započne kompletní render pro daný svět
+    cancel-render: Zruší render pro daný svět
+    pause-render: Pozastaví všechny probíhající rendery pro daný svět
+    radius-render: Započne kruhový render
+    hide: Schová hráče z mapy
+    show: Zobrazí hráče na mapě
+  argument:
+    optional-world: Výchozí hodnota je hráčův momentální svět, kde se nachází není-li specifikováno
+    optional-center: Výchozí hodnota je (<white>0<gray>,</gray> 0</white>) není-li specifikováno
+    optional-player: Výchozí hodnota je hráč provádějící příkaz (konzole musí specifikovat hráče)
+    help-query: Help dotaz
+  hide:
+    already-hidden: <red><player> je už schovaný na mapě
+    hidden: <green><player> je nyní schován na mapě
+  show:
+    not-hidden: <red><player> není schován na mapě
+    shown: <green><player> je nyní viditelný na mapě
+ui:
+  page-title: Pl3xMap - {world}
+  coordinates: Souřadnice<br/>{x}, {z}
+  sidebar:
+    player-list: Hráči ({cur}/{max})
+    world-list: Světy
+  layers:
+    player-tracker: Hráči
+    world-spawn: Spawn
+    world-border: Hranice světa
+log:
+  prefix: <dark_aqua>[<light_purple>Pl3xMap</light_purple>]</dark_aqua>
+  started-full-render: <dark_aqua>Začal kompletní render světa <yellow><world>
+  started-radius-render: <dark_aqua>Začal kruhový render světa <yellow><world>
+  scanning-region-files: <yellow>Skenování region souborů... (toto může trvat pár minut)
+  found-total-region-files: <green>Nalezeno celkově <gray><total> <green>region souborů
+  finished-rendering: <dark_aqua>Dokončeno renderování mapy pro svět <yellow><world>
+  cancelled-rendering: <dark_aqua>Renderování mapy pro svět <yellow><world> <dark_aqua>bylo přerušeno
+  resumed-rendering: <dark_aqua>Renderování mapy pro svět <yellow><world> <dark_aqua>bylo obnoveno
+  scanning-region-progress: <gray>(</gray><yellow><percent></yellow><gray>)</gray> <dark_aqua>Svět<gray>:</gray> <yellow><world></yellow> Počet chunků<gray>:</gray> <yellow><current_chunks></yellow><gray>/</gray><yellow><total_chunks></yellow> Uběhlý čas<gray>:</gray> <yellow><elapsed></yellow> Zbývá<gray>:</gray> <yellow><eta></yellow> Rychlost<gray>:</gray> <yellow><rate></yellow> cps (chunk za sekundu)
+  scanning-region-progress-with-regions: <gray>(</gray><yellow><percent></yellow><gray>)</gray> <dark_aqua>Svět<gray>:</gray> <yellow><world></yellow> Regiony<gray>:</gray> <yellow><current_regions></yellow><gray>/</gray><yellow><total_regions></yellow> Počet chunků<gray>:</gray> <yellow><current_chunks></yellow><gray>/</gray><yellow><total_chunks></yellow> Uběhlý čas<gray>:</gray> <yellow><elapsed></yellow> Zbývá<gray>:</gray> <yellow><eta></yellow> Rychlost<gray>:</gray> <yellow><rate></yellow> cps (chunk za sekundu)
+  internal-web-disabled: <green>Webový server je vypnutý v config.yml
+  internal-web-started: <green>Webový server běží na <bind>:<port>
+  internal-web-stopped: <green>Webový server zastaven
+  internal-web-start-error: Webový server se nepodařilo spustit
+  could-not-create-directory: Nepovedlo se vytvořit adresář {path}
+  could-not-save-region: Nepodařilo se uložit mapu pro region {x},{z}
+  internal-web-not-running: Vyskytla se chyba ve webovém serveru
