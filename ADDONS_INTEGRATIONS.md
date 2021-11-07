@@ -10,6 +10,7 @@ These plugins have direct integrations with Pl3xMap.
 | Residence 5.0.0.2+   | [Download](https://www.spigotmc.org/resources/residence.11480/)    |
 | HuskHomes v2.8+      | [Download](https://www.spigotmc.org/resources/huskhomes.83767/)    |
 | HuskTowns v1.4+      | [Download](https://www.spigotmc.org/resources/husktowns.92672/)    |
+| StaffFacilities v5.2.0+      | [Download](https://www.spigotmc.org/resources/staff-facilities.13097/)    |
 
 ## Addons
 
