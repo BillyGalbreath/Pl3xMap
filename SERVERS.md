@@ -17,5 +17,6 @@
 | [Beacoland](https://beacoland.com/)            | [https://beacoland.com/map](https://beacoland.com/map)         |
 | Diamond Axe Vanilla                               | [https://davmap.commisioncorp.com/](https://davmap.commisioncorp.com/) |
 | [VestlandetMC](https://www.vestlandetmc.no/)      | [https://kart.vestlandetmc.no](https://kart.vestlandetmc.no)   |
+| [PeaceAndCube](https://peaceandcube.fr/)          | [http://play.peaceandcube.fr:8080](http://play.peaceandcube.fr:8080)   |
 
 If you'd like your server listed here, submit a PR or talk to BillyGalbreath in [Discord](https://discord.gg/B8WpDPXeBh).
