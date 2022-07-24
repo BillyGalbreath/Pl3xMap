@@ -833,8 +833,8 @@ public class Advanced extends AbstractConfig {
         put(Blocks.REDSTONE_BLOCK, 0xA91705);
         put(Blocks.REDSTONE_LAMP, 0x64391F);
         put(Blocks.REDSTONE_ORE, 0x8E6C6C);
-        put(Blocks.REDSTONE_TORCH, 0x000000);
-        put(Blocks.REDSTONE_WALL_TORCH, 0x000000);
+        put(Blocks.REDSTONE_TORCH, 0xF85528);
+        put(Blocks.REDSTONE_WALL_TORCH, 0xF855280);
         put(Blocks.RED_BANNER, 0x000000);
         put(Blocks.RED_BED, 0xC7C7C7);
         put(Blocks.RED_CANDLE, 0x9B2825);
@@ -909,8 +909,8 @@ public class Advanced extends AbstractConfig {
         put(Blocks.SOUL_LANTERN, 0x486473);
         put(Blocks.SOUL_SAND, 0x523E33);
         put(Blocks.SOUL_SOIL, 0x4C3A2F);
-        put(Blocks.SOUL_TORCH, 0x000000);
-        put(Blocks.SOUL_WALL_TORCH, 0x000000);
+        put(Blocks.SOUL_TORCH, 0x6BE2E6);
+        put(Blocks.SOUL_WALL_TORCH, 0x6BE2E6);
         put(Blocks.SPAWNER, 0x252F40);
         put(Blocks.SPONGE, 0xC4C14B);
         put(Blocks.SPORE_BLOSSOM, 0xD463A4);
@@ -968,7 +968,7 @@ public class Advanced extends AbstractConfig {
         put(Blocks.TERRACOTTA, 0x985E44);
         put(Blocks.TINTED_GLASS, 0x2B262E);
         put(Blocks.TNT, 0x873D36);
-        put(Blocks.TORCH, 0x000000);
+        put(Blocks.TORCH, 0xFFD966);
         put(Blocks.TRAPPED_CHEST, 0x866025);
         put(Blocks.TRIPWIRE, 0x000000);
         put(Blocks.TRIPWIRE_HOOK, 0x000000);
@@ -983,7 +983,7 @@ public class Advanced extends AbstractConfig {
         put(Blocks.VERDANT_FROGLIGHT, 0xEAF6E9);
         put(Blocks.VINE, 0x747474);
         put(Blocks.VOID_AIR, 0x000000);
-        put(Blocks.WALL_TORCH, 0x000000);
+        put(Blocks.WALL_TORCH, 0xFFD966);
         put(Blocks.WARPED_BUTTON, 0x000000);
         put(Blocks.WARPED_DOOR, 0x2D7E78);
         put(Blocks.WARPED_FENCE, 0x2B6963);
