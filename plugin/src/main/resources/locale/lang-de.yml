@@ -17,7 +17,7 @@ command:
     optional-center: Defaults to (<white>0<gray>,</gray> 0</white>) if unspecified
   confirm:
     description: Bestätige einen Befehl
-    not-rendering: <red>Bestätigung benötigt. Bestätige mit <grey>/<command> confirm
+    not-rendering: <red>Bestätigung benötigt. Bestätige mit <grey>/map confirm
     success: <red>Du hast nichts zum bestätigen!
   pauserender:
     description: Pausiert alle Render einer Welt
@@ -87,13 +87,13 @@ command:
       <grey>    Übrig: <remaining> (<gold><cps> cps</gold>)
     description: View a world's render status
     already-rendering: |-
-      <gold>Map status of <world>
-      Background: <green>Running
-      Active: <red>Not Running
+      <gold>Map Status von <world>
+      Hintergrund: <green>Running
+      Aktiv: <red>Nicht am laufen
     success: |-
       <gold>Map status of <world>
-      Background: <red>Paused
-      Active: <green><status>
+      Hintergrund: <red>Pausiert
+      Aktiv: <green><status>
         <gray>- Chunks Rendered <chunk_done>/<chunks_total> (<gold><percent>%</gold>)
         <gray>- Time Remaining: <remaining> (<gold><cps> cps</gold>)
     player-only-feature: <red>Dieses Feature können nur Spieler benutzen
