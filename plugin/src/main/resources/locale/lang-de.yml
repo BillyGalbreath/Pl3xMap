@@ -1,0 +1,125 @@
+progress:
+  chat: '<world>: <processed_chunks>/<total_chunks> (<percent>%) <gold><cps> cps</gold> eta: <eta>'
+  bossbar: '<gold>Map render of <grey><world></grey>: <red><percent></red>% eta: <eta>'
+  eta:
+    unknown: Unbekannt
+prefix:
+  logger: '[<dark_aqua>Pl3xMap</dark_aqua>] '
+  command: '[<blue>Pl3xMap</blue>] '
+command:
+  event:
+    click-for-help: Klick für Hilfe
+    click-to-confirm: Klick zum Bestätigen
+  argument:
+    help-query: Hilfe
+    optional-player: Defaults to the executing player if unspecified (console must specify a player)
+    optional-world: Defaults to the players current world if not provided
+    optional-center: Defaults to (<white>0<gray>,</gray> 0</white>) if unspecified
+  confirm:
+    description: Bestätige einen Befehl
+    not-rendering: <red>Bestätigung benötigt. Bestätige mit <grey>/<command> confirm
+    success: <red>Du hast nichts zum bestätigen!
+  pauserender:
+    description: Pausiert alle Render einer Welt
+    paused: <green>Render für <grey><world> <green>Pausiert
+    resumed: <green>Render für <grey><world> <green>Fortgesetzt
+  radiusrender:
+    description: Render die Sektion einer Welt
+    already-rendering: <grey><world> <red>ist schon am rendern!
+    starting: <green>Starte Radius render von <gold><world>
+    finished: <green>Radius Render von <grey><world> <green>in <gold><elapsed> <green>abgeschlossen!
+    cancelled: <red>Radius Render von <grey><world> <red>abgebrochen
+    obtaining-regions: <yellow>Obtaining chunks in radius... (this may take a moment)
+    found-total-regions: <green>Found <grey><total></grey> chunks in radius
+    use-status-for-progress: <gold>Use <grey>/map status</grey> command to view progress
+    error-parsing-region-file: Failed to parse coordinates for region file '<path>' (<filename>)
+  resetmap:
+    description: Cancel active render of a world
+    active-render: <red>There is an active render for <world>
+    success: <green>Map für <grey><world> <green>zurückgesetzt!
+    failed: <red>Could not reset map for <world>
+  base:
+    usage: <light_purple><description>:\n<yellow>/<grey><command> <usage>
+    subcommands:
+      title: '<color:#25b8ff>Available Commands</color><color:#9558ff>:'
+      full-command: <color:#9558ff>/<color:#dedede><command>
+      entry:
+        text: ' <color:#999999><prefix> <color:#dedede><command></color> <color:#9558ff>-</color> <i><description>'
+        prefix: \u251C
+        prefix-last: \u2514
+  cancelrender:
+    description: Cancel active render of a world
+    not-rendering: <red><world> does not have active render
+    success: <green>Render on <world> has been cancelled
+  fullrender:
+    description: Render eine Komplette Welt
+    already-rendering: <grey><world> <red>ist schon am rendern
+    starting: <green>Starting fullrender of <world>
+    finished: <green>Finished fullrender on <world>
+    cancelled: <red>Cancelled fullrender on <world>
+    obtaining-regions: <yellow>Obtaining region files
+    sorting-regions: <yellow>Sorting region files
+    found-total-regions: <green>Found <grey><total></grey> region files
+    use-status-for-progress: <gold>Use <grey>/map status</grey> command to view progress
+    error-parsing-region-file: Failed to parse coordinates for region file '<path>' (<filename>)
+    resumed-rendering: <yellow>Previously incomplete full render for <world> has resumed where it left off
+    resumed-total-regions: <green>Resumed scanning <grey><done></grey>/<grey><total></grey> regions (<gold><percent>%</gold>)
+  help:
+    description: Hilfe für Pl3xMap Befehle
+  hide:
+    description: Verstecke Spieler von Map
+    already-hidden: <red><player> is already hidden from map
+    success: <green><player> ist nun auf der Map versteckt!
+  reload:
+    description: Lade das Plugin neu
+    success: <green>Pl3xMap <grey>v<version> <green>neu geladen!
+  show:
+    description: Zeige Spieler auf Map
+    not-hidden: <red><player> war nicht auf der Map versteckt!
+    success: <green><player> ist nicht mehr auf der Map versteckt!
+  status:
+    render: |-
+      <green>Map Status von <grey><world>
+      <white>  Hintergrund: <i><background>
+      <white>  Vordergrund: <i><foreground>
+    render-details: |-
+      <grey>    Chunks: <chunks_done>/<chunks_total> (<gold><percent>%</gold>)
+      <grey>    Übrig: <remaining> (<gold><cps> cps</gold>)
+    description: View a world's render status
+    already-rendering: |-
+      <gold>Map status of <world>
+      Background: <green>Running
+      Active: <red>Not Running
+    success: |-
+      <gold>Map status of <world>
+      Background: <red>Paused
+      Active: <green><status>
+        <gray>- Chunks Rendered <chunk_done>/<chunks_total> (<gold><percent>%</gold>)
+        <gray>- Time Remaining: <remaining> (<gold><cps> cps</gold>)
+    player-only-feature: <red>Dieses Feature können nur Spieler benutzen
+httpd:
+  started:
+    success: <green>Interner Webserver läuft unter <yellow><bind></yellow>:<yellow><port></yellow>
+    error: <red>Interner Webserver konnte nicht starten
+  stopped:
+    success: <green>Interner Webserver gestoppt
+    error: <red>Ein Fehler ist mit dem Internen Webserver aufgetreten!
+  disabled: <green>Interner Webserver wurde in <grey>config.yml <green>deaktiviert!
+error:
+  unknown-error: <red>Unbekannter Fehler!
+  unknown-subcommand: <red>Unbekannter Unterbefehl!
+  must-specify-player: <red>Du musst den Spieler angeben!
+  no-such-player: <red>Spieler nicht gefunden!
+  must-specify-world: <red>Du musst eine Welt angeben!
+  no-such-world: <red>Welt nicht gefunden!
+  world-disabled: <red>Pl3xMap ist in dieser Welt deaktiviert!
+  render-stalled: <red>Render has stalled! Cancelling.
+ui:
+  title: Pl3xMap
+  coords:
+    label: Koordinaten
+    value: <x>, <z>
+  players: Spieler (<online>/<max>)
+  worlds: Welten
+  player-tracker: Spieler
+  layers: Schichten
