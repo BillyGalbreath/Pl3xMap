@@ -30,14 +30,14 @@ command:
     finished: <green>Radius Render von <grey><world> <green>in <gold><elapsed> <green>abgeschlossen!
     cancelled: <red>Radius Render von <grey><world> <red>abgebrochen
     obtaining-regions: <yellow>Obtaining chunks in radius... (this may take a moment)
-    found-total-regions: <green>Found <grey><total></grey> chunks in radius
-    use-status-for-progress: <gold>Use <grey>/map status</grey> command to view progress
+    found-total-regions: <grey><total></grey> <green>Chunks im Radius gefunden
+    use-status-for-progress: <gold>Nutz <grey>/map status</grey> um Fortschritt zu sehen
     error-parsing-region-file: Failed to parse coordinates for region file '<path>' (<filename>)
   resetmap:
-    description: Cancel active render of a world
-    active-render: <red>There is an active render for <world>
+    description: Breche aktiven render für Welt ab
+    active-render: <red>Ein aktiver render für <grey><world> <red>läuft!
     success: <green>Map für <grey><world> <green>zurückgesetzt!
-    failed: <red>Could not reset map for <world>
+    failed: <red>Konnte Map für <grey><world> <red>nicht zurücksetzen!
   base:
     usage: <light_purple><description>:\n<yellow>/<grey><command> <usage>
     subcommands:
@@ -48,9 +48,9 @@ command:
         prefix: \u251C
         prefix-last: \u2514
   cancelrender:
-    description: Cancel active render of a world
-    not-rendering: <red><world> does not have active render
-    success: <green>Render on <world> has been cancelled
+    description: Breche aktiven render in Welt ab
+    not-rendering: <grey><world> <red>hat keinen aktiven Render
+    success: <green>Render in <grey><world> <green>wurde abgebrochen
   fullrender:
     description: Render eine Komplette Welt
     already-rendering: <grey><world> <red>ist schon am rendern
