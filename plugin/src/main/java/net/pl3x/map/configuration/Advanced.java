@@ -455,6 +455,7 @@ public class Advanced extends AbstractConfig {
         put(Blocks.FIRE_CORAL_WALL_FAN, 0x9F232E);
         put(Blocks.FLETCHING_TABLE, 0xC6B687);
         put(Blocks.FLOWERING_AZALEA, 0x717A41);
+        put(Blocks.FLOWERING_AZALEA_LEAVES, 0x9D5CAB);
         put(Blocks.FLOWER_POT, 0x000000);
         put(Blocks.FROGSPAWN, 0x6A5B52);
         put(Blocks.FROSTED_ICE, 0x8CB5FD);
@@ -775,7 +776,7 @@ public class Advanced extends AbstractConfig {
         put(Blocks.POTTED_DARK_OAK_SAPLING, 0x3C5B1E);
         put(Blocks.POTTED_DEAD_BUSH, 0x6D5029);
         put(Blocks.POTTED_FERN, 0x7E7E7E);
-        put(Blocks.POTTED_FLOWERING_AZALEA_BUSH, 0x737747);
+        put(Blocks.POTTED_FLOWERING_AZALEA_BUSH, 0x9D5CAB);
         put(Blocks.POTTED_JUNGLE_SAPLING, 0x305111);
         put(Blocks.POTTED_LILY_OF_THE_VALLEY, 0x7DB061);
         put(Blocks.POTTED_MANGROVE_PROPAGULE, 0x5FAF54);
