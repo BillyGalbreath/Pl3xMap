@@ -32,7 +32,7 @@ public class Lang extends AbstractConfig {
     @Key("command.cancelrender.not-rendering")
     public static String COMMAND_CANCELRENDER_NOT_RENDERING = "<grey><world> <red>does not have active render";
     @Key("command.cancelrender.success")
-    public static String COMMAND_CANCELRENDER_SUCCESS = "<green>Render on <grey><world> <green>has been cancelled";
+    public static String COMMAND_CANCELRENDER_SUCCESS = "<green>Render on <grey><world></grey> has been cancelled";
 
     @Key("command.confirm.description")
     public static String COMMAND_CONFIRM_DESCRIPTION = "Confirm a pending command";
@@ -70,7 +70,7 @@ public class Lang extends AbstractConfig {
     @Key("command.hide.description")
     public static String COMMAND_HIDE_DESCRIPTION = "Hide a player from the map";
     @Key("command.hide.already-hidden")
-    public static String COMMAND_HIDE_ALREADY_HIDDEN = "<grey>><player> <red>is already hidden from map";
+    public static String COMMAND_HIDE_ALREADY_HIDDEN = "<grey><player> <red>is already hidden from map";
     @Key("command.hide.success")
     public static String COMMAND_HIDE_SUCCESS = "<grey><player> <green>is now hidden from map";
 
