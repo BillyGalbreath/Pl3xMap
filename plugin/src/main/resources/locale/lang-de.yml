@@ -12,9 +12,9 @@ command:
     click-to-confirm: Klick zum Bestätigen
   argument:
     help-query: Hilfe
-    optional-player: Defaults to the executing player if unspecified (console must specify a player)
-    optional-world: Defaults to the players current world if not provided
-    optional-center: Defaults to (<white>0<gray>,</gray> 0</white>) if unspecified
+    optional-player: Benutzt den ausführenden Spieler, wenn keiner Ausgewählt (Konsole muss angeben)
+    optional-world: Benutzt die Welt des ausführenden Spielers, wenn keine angegeben
+    optional-center: Benutzt (<white>0<gray>,</gray> 0</white>), wenn nicht angegeben
   confirm:
     description: Bestätige einen Befehl
     not-rendering: <red>Bestätigung benötigt. Bestätige mit <grey>/map confirm
