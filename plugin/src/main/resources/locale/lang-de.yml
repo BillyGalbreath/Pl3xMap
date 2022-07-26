@@ -1,6 +1,6 @@
 progress:
-  chat: '<world>: <processed_chunks>/<total_chunks> (<percent>%) <gold><cps> cps</gold> eta: <eta>'
-  bossbar: '<gold>Map render of <grey><world></grey>: <red><percent></red>% eta: <eta>'
+  chat: '<world>: <processed_chunks>/<total_chunks> (<percent>%) <gold><cps> cps</gold> Schätzung: <eta>'
+  bossbar: '<gold>Map Render von <grey><world></grey>: <red><percent></red>% Schätzung: <eta>'
   eta:
     unknown: Unbekannt
 prefix:
