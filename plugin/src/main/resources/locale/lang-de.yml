@@ -32,7 +32,7 @@ command:
     obtaining-regions: <yellow>Obtaining chunks in radius... (this may take a moment)
     found-total-regions: <grey><total></grey> <green>Chunks im Radius gefunden
     use-status-for-progress: <gold>Nutz <grey>/map status</grey> um Fortschritt zu sehen
-    error-parsing-region-file: Failed to parse coordinates for region file '<path>' (<filename>)
+    error-parsing-region-file: Konnte Regions Datei nicht parsen '<path>' (<filename>)
   resetmap:
     description: Breche aktiven render für Welt ab
     active-render: <red>Ein aktiver render für <grey><world> <red>läuft!
@@ -41,7 +41,7 @@ command:
   base:
     usage: <light_purple><description>:\n<yellow>/<grey><command> <usage>
     subcommands:
-      title: '<color:#25b8ff>Available Commands</color><color:#9558ff>:'
+      title: '<color:#25b8ff>Verfügbare Befehle</color><color:#9558ff>:'
       full-command: <color:#9558ff>/<color:#dedede><command>
       entry:
         text: ' <color:#999999><prefix> <color:#dedede><command></color> <color:#9558ff>-</color> <i><description>'
@@ -54,21 +54,21 @@ command:
   fullrender:
     description: Render eine Komplette Welt
     already-rendering: <grey><world> <red>ist schon am rendern
-    starting: <green>Starting fullrender of <world>
-    finished: <green>Finished fullrender on <world>
-    cancelled: <red>Cancelled fullrender on <world>
-    obtaining-regions: <yellow>Obtaining region files
-    sorting-regions: <yellow>Sorting region files
-    found-total-regions: <green>Found <grey><total></grey> region files
-    use-status-for-progress: <gold>Use <grey>/map status</grey> command to view progress
-    error-parsing-region-file: Failed to parse coordinates for region file '<path>' (<filename>)
-    resumed-rendering: <yellow>Previously incomplete full render for <world> has resumed where it left off
-    resumed-total-regions: <green>Resumed scanning <grey><done></grey>/<grey><total></grey> regions (<gold><percent>%</gold>)
+    starting: <green>Starte vollen Render von <grey><world></grey>!
+    finished: <green>Vollen Render von <grey><world> </grey>abgeschlossen!
+    cancelled: <red>Vollen Render von <grey><world> </grey>abgebrochen.
+    obtaining-regions: <yellow>Bekomme Regions Dateien
+    sorting-regions: <yellow>Sortiere Regions Dateien
+    found-total-regions: <grey><total> <green>Regions Dateien wurden gefunden!
+    use-status-for-progress: <gold>Nutz <grey>/map status</grey> um den Fortschritt zu sehen
+    error-parsing-region-file: Konnte Koordinaten von Regions Datei nicht bekommen '<path>' (<filename>)
+    resumed-rendering: <yellow>Vorher nicht abgeschlossener Render für <grey><world> </grey>macht nun weiter wo er gestoppt hat!
+    resumed-total-regions: <green>Scannen Weitergeführt von <grey><done></grey>/<grey><total></grey> Regionen (<gold><percent>%</gold>)
   help:
     description: Hilfe für Pl3xMap Befehle
   hide:
     description: Verstecke Spieler von Map
-    already-hidden: <red><player> is already hidden from map
+    already-hidden: <grey><player> <red>ist schon von der Map versteckt!
     success: <green><player> ist nun auf der Map versteckt!
   reload:
     description: Lade das Plugin neu
@@ -85,17 +85,17 @@ command:
     render-details: |-
       <grey>    Chunks: <chunks_done>/<chunks_total> (<gold><percent>%</gold>)
       <grey>    Übrig: <remaining> (<gold><cps> cps</gold>)
-    description: View a world's render status
+    description: Schaue den Render Status einer Welt an
     already-rendering: |-
-      <gold>Map Status von <world>
+      <gold>Map Status von <grey><world>
       Hintergrund: <green>Running
       Aktiv: <red>Nicht am laufen
     success: |-
-      <gold>Map status of <world>
+      <gold>Map Status von <grey><world>
       Hintergrund: <red>Pausiert
       Aktiv: <green><status>
-        <gray>- Chunks Rendered <chunk_done>/<chunks_total> (<gold><percent>%</gold>)
-        <gray>- Time Remaining: <remaining> (<gold><cps> cps</gold>)
+        <gray>- Chunks gerendert <chunk_done>/<chunks_total> (<gold><percent>%</gold>)
+        <gray>- Zeit übrig: <remaining> (<gold><cps> cps</gold>)
     player-only-feature: <red>Dieses Feature können nur Spieler benutzen
 httpd:
   started:
@@ -104,7 +104,7 @@ httpd:
   stopped:
     success: <green>Interner Webserver gestoppt
     error: <red>Ein Fehler ist mit dem Internen Webserver aufgetreten!
-  disabled: <green>Interner Webserver wurde in <grey>config.yml <green>deaktiviert!
+  disabled: <green>Interner Webserver wurde in <grey>config.yml </grey>deaktiviert!
 error:
   unknown-error: <red>Unbekannter Fehler!
   unknown-subcommand: <red>Unbekannter Unterbefehl!
@@ -113,7 +113,7 @@ error:
   must-specify-world: <red>Du musst eine Welt angeben!
   no-such-world: <red>Welt nicht gefunden!
   world-disabled: <red>Pl3xMap ist in dieser Welt deaktiviert!
-  render-stalled: <red>Render has stalled! Cancelling.
+  render-stalled: <red>Render steckt fest! Breche ab.
 ui:
   title: Pl3xMap
   coords:
