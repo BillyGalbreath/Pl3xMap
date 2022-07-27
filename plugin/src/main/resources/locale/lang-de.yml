@@ -27,12 +27,12 @@ command:
     description: Render die Sektion einer Welt
     already-rendering: <grey><world> <red>ist schon am rendern!
     starting: <green>Starte Radius render von <gold><world>
-    finished: <green>Radius Render von <grey><world> <green>in <gold><elapsed> <green>abgeschlossen!
+    finished: <green>Radius Render von <grey><world> </grey>in <grey><elapsed> </grey>abgeschlossen!
     cancelled: <red>Radius Render von <grey><world> <red>abgebrochen
-    obtaining-regions: <yellow>Obtaining chunks in radius... (this may take a moment)
+    obtaining-regions: <yellow>Ergatter Chunks im Radius... (das könnte etwas dauern)
     found-total-regions: <grey><total></grey> <green>Chunks im Radius gefunden
     use-status-for-progress: <gold>Nutz <grey>/map status</grey> um Fortschritt zu sehen
-    error-parsing-region-file: Konnte Regions Datei nicht parsen '<path>' (<filename>)
+    error-parsing-region-file: Konnte Regions Datei nicht parsen <grey><path> (<filename>)
   resetmap:
     description: Breche aktiven render für Welt ab
     active-render: <red>Ein aktiver render für <grey><world> <red>läuft!
@@ -50,7 +50,7 @@ command:
   cancelrender:
     description: Breche aktiven render in Welt ab
     not-rendering: <grey><world> <red>hat keinen aktiven Render
-    success: <green>Render in <grey><world> <green>wurde abgebrochen
+    success: <green>Render in <grey><world> </grey>wurde abgebrochen
   fullrender:
     description: Render eine Komplette Welt
     already-rendering: <grey><world> <red>ist schon am rendern
@@ -61,7 +61,7 @@ command:
     sorting-regions: <yellow>Sortiere Regions Dateien
     found-total-regions: <grey><total> <green>Regions Dateien wurden gefunden!
     use-status-for-progress: <gold>Nutz <grey>/map status</grey> um den Fortschritt zu sehen
-    error-parsing-region-file: Konnte Koordinaten von Regions Datei nicht bekommen '<path>' (<filename>)
+    error-parsing-region-file: Konnte Koordinaten von Regions Datei nicht bekommen <grey><path> (<filename>)
     resumed-rendering: <yellow>Vorher nicht abgeschlossener Render für <grey><world> </grey>macht nun weiter wo er gestoppt hat!
     resumed-total-regions: <green>Scannen Weitergeführt von <grey><done></grey>/<grey><total></grey> Regionen (<gold><percent>%</gold>)
   help:
@@ -109,10 +109,10 @@ error:
   unknown-error: <red>Unbekannter Fehler!
   unknown-subcommand: <red>Unbekannter Unterbefehl!
   must-specify-player: <red>Du musst den Spieler angeben!
-  no-such-player: <red>Spieler nicht gefunden!
+  no-such-player: <red>Spieler <grey><player> <red>nicht gefunden!
   must-specify-world: <red>Du musst eine Welt angeben!
-  no-such-world: <red>Welt nicht gefunden!
-  world-disabled: <red>Pl3xMap ist in dieser Welt deaktiviert!
+  no-such-world: <red>Welt <grey><world> <red>nicht gefunden!
+  world-disabled: <red>Pl3xMap ist in der Welt <grey><world> <red>deaktiviert!
   render-stalled: <red>Render steckt fest! Breche ab.
 ui:
   title: Pl3xMap

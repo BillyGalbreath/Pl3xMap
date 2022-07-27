@@ -32,7 +32,7 @@ public class Lang extends AbstractConfig {
     @Key("command.cancelrender.not-rendering")
     public static String COMMAND_CANCELRENDER_NOT_RENDERING = "<grey><world> <red>does not have active render";
     @Key("command.cancelrender.success")
-    public static String COMMAND_CANCELRENDER_SUCCESS = "<green>Render on <grey><world></grey> has been cancelled";
+    public static String COMMAND_CANCELRENDER_SUCCESS = "<green>Render on <grey><world> </grey>has been cancelled";
 
     @Key("command.confirm.description")
     public static String COMMAND_CONFIRM_DESCRIPTION = "Confirm a pending command";
@@ -62,7 +62,7 @@ public class Lang extends AbstractConfig {
     @Key("command.fullrender.use-status-for-progress")
     public static String COMMAND_FULLRENDER_USE_STATUS_FOR_PROGRESS = "<gold>Use <grey>/map status</grey> command to view progress";
     @Key("command.fullrender.error-parsing-region-file")
-    public static String COMMAND_FULLRENDER_ERROR_PARSING_REGION_FILE = "Failed to parse coordinates for region file '<path>' (<filename>)";
+    public static String COMMAND_FULLRENDER_ERROR_PARSING_REGION_FILE = "Failed to parse coordinates for region file <grey><path> (<filename>)";
 
     @Key("command.help.description")
     public static String COMMAND_HELP_DESCRIPTION = "Get help for Pl3xmap commands";
@@ -70,9 +70,9 @@ public class Lang extends AbstractConfig {
     @Key("command.hide.description")
     public static String COMMAND_HIDE_DESCRIPTION = "Hide a player from the map";
     @Key("command.hide.already-hidden")
-    public static String COMMAND_HIDE_ALREADY_HIDDEN = "<grey><player> <red>is already hidden from map";
+    public static String COMMAND_HIDE_ALREADY_HIDDEN = "<grey><player> <red>is already hidden from the map";
     @Key("command.hide.success")
-    public static String COMMAND_HIDE_SUCCESS = "<grey><player> <green>is now hidden from map";
+    public static String COMMAND_HIDE_SUCCESS = "<grey><player> <green>is now hidden from the map";
 
     @Key("command.pauserender.description")
     public static String COMMAND_PAUSERENDER_DESCRIPTION = "Pauses all renders for the specified world";
@@ -117,9 +117,9 @@ public class Lang extends AbstractConfig {
     @Key("command.show.description")
     public static String COMMAND_SHOW_DESCRIPTION = "Show a player on the map";
     @Key("command.show.not-hidden")
-    public static String COMMAND_SHOW_NOT_HIDDEN = "<grey><player> <red>is not hidden from map";
+    public static String COMMAND_SHOW_NOT_HIDDEN = "<grey><player> <red>is not hidden from the map";
     @Key("command.show.success")
-    public static String COMMAND_SHOW_SUCCESS = "<grey><player> <green>is no longer hidden from map";
+    public static String COMMAND_SHOW_SUCCESS = "<grey><player> <green>is no longer hidden from the map";
 
     @Key("command.status.description")
     public static String COMMAND_STATUS_DESCRIPTION = "View a world's render status";
@@ -155,7 +155,7 @@ public class Lang extends AbstractConfig {
     @Key("httpd.stopped.error")
     public static String HTTPD_STOP_ERROR = "<red>An error occurred with the internal webserver";
     @Key("httpd.disabled")
-    public static String HTTPD_DISABLED = "<green>Internal webserver is disabled in config.yml";
+    public static String HTTPD_DISABLED = "<green>Internal webserver is disabled in <grey>config.yml";
 
     @Key("progress.chat")
     public static String PROGRESS_CHAT = "<world>: <processed_chunks>/<total_chunks> (<percent>%) <gold><cps> cps</gold> eta: <eta>";
