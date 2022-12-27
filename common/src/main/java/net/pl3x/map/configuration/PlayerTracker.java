@@ -22,7 +22,7 @@ public final class PlayerTracker extends AbstractConfig {
     @Key("settings.hide.invisible")
     @Comment("Should invisible players be hidden from the map")
     public static boolean HIDE_INVISIBLE = true;
-    
+
     @Key("settings.hide.spectators")
     @Comment("Should spectators be hidden from the map")
     public static boolean HIDE_SPECTATORS = true;
