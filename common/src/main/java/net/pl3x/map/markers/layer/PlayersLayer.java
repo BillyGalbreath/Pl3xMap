@@ -74,6 +74,9 @@ public class PlayersLayer extends WorldLayer {
             if (player.isNPC()) {
                 return;
             }
+            if (PlayerTracker.HIDE_POSITION) {
+                return;
+            }
             if (PlayerTracker.HIDE_INVISIBLE && player.isInvisible()) {
                 return;
             }

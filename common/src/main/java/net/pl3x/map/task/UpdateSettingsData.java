@@ -54,6 +54,9 @@ public class UpdateSettingsData implements Runnable {
             } else if (PlayerTracker.HIDE_INVISIBLE && player.isInvisible()) {
                 worldName = null;
                 position = null;
+            } else if (PlayerTracker.HIDE_POSITION) {
+                worldName = null;
+                position = null;
             }
 
             Map<String, Object> entry = new LinkedHashMap<>();
