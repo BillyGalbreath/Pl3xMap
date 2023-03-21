@@ -5,6 +5,7 @@ api-version: "1.19"
 author: "BillyGalbreath"
 description: "${description}"
 website: "${website}"
+softdepend: [SlimeWorldManager]
 
 permissions:
   pl3xmap.command.map:
