@@ -1041,6 +1041,7 @@ public class ColorsConfig extends AbstractConfig {
         put("minecraft:windswept_hills", 0x597D72);
         put("minecraft:windswept_savanna", 0xE5DA87);
         put("minecraft:wooded_badlands", 0xB09765);
+        put("minecraft:cherry_grove", 0xEBBDD7);
     }};
 
     @Key("blocks.air")
