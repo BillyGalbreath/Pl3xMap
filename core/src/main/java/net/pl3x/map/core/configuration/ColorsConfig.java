@@ -983,6 +983,7 @@ public class ColorsConfig extends AbstractConfig {
         put("minecraft:basalt_deltas", 0x403636);
         put("minecraft:beach", 0xFADE55);
         put("minecraft:birch_forest", 0x307444);
+        put("minecraft:cherry_grove", 0xEBBDD7);
         put("minecraft:cold_ocean", 0x202070);
         put("minecraft:crimson_forest", 0xDD0808);
         put("minecraft:dark_forest", 0x40511A);
@@ -1041,7 +1042,6 @@ public class ColorsConfig extends AbstractConfig {
         put("minecraft:windswept_hills", 0x597D72);
         put("minecraft:windswept_savanna", 0xE5DA87);
         put("minecraft:wooded_badlands", 0xB09765);
-        put("minecraft:cherry_grove", 0xEBBDD7);
     }};
 
     @Key("blocks.air")
