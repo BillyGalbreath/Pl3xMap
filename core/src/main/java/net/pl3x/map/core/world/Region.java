@@ -83,6 +83,8 @@ public class Region {
 
     public @NotNull Chunk getChunk(int chunkX, int chunkZ) {
         int index = getChunkIndex(chunkX, chunkZ);
+        if (index < 0 || index >= this.checks.length)
+            throw new ArrayIndexOutOfBoundsException("Invalid chunk index: " + index);
         Chunk chunk = this.chunks[index];
         if (chunk == null) {
             try (RandomAccessFile raf = new RandomAccessFile(getRegionFile(), "r")) {
