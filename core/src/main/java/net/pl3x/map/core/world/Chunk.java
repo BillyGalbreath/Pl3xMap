@@ -194,7 +194,11 @@ public abstract class Chunk {
     }
 
     public @Nullable BlockData getData(int x, int z) {
-        return this.data[((z & 0xF) << 4) + (x & 0xF)];
+        //return this.data[((z & 0xF) << 4) + (x & 0xF)];
+        int index = ((z & 0xF) << 4) + (x & 0xF);
+        if (index < 0 || index >= this.data.length)
+            throw new ArrayIndexOutOfBoundsException("Invalid data index: " + index);
+        return this.data[index];
     }
 
     public static @NotNull Chunk create(@NotNull World world, @NotNull Region region, @NotNull CompoundTag tag, int index) {
