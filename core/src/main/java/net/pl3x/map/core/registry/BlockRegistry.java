@@ -41,6 +41,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BlockRegistry extends Registry<@NotNull Block> {
     private static final Gson GSON = new GsonBuilder().create();
+    private static final int MAX_INDEX = 1023;
 
     private final Map<String, Integer> indexMap;
 
@@ -64,22 +65,24 @@ public class BlockRegistry extends Registry<@NotNull Block> {
         }
     }
 
+    public Map<String, Integer> getIndexMap() {
+        return indexMap;
+    }
+
     private int getNextIndex(String id) {
         int index = this.indexMap.getOrDefault(id, -1);
         if (index > -1) {
             return index;
         }
-        int i = 0;
-        while (true) {
-            if (!this.indexMap.containsValue(i)) {
-                this.indexMap.put(id, i);
-                return i;
-            }
-            i++;
-        }
+
+        int i = this.indexMap.size();
+        if (i > MAX_INDEX) return -1;
+
+        this.indexMap.put(id, i);
+        return i;
     }
 
-    public @NotNull Block register(@NotNull String id, int color) {
+    public Block register(@NotNull String id, int color) {
         Block block = super.get(id);
         if (block != null) {
             return block; // block already registered
@@ -87,7 +90,11 @@ public class BlockRegistry extends Registry<@NotNull Block> {
         if (id.startsWith("minecraft:")) {
             Logger.warn("Registering unknown vanilla block " + id);
         }
-        return register(id, new Block(getNextIndex(id), id, color));
+
+        int nextIndex = getNextIndex(id);
+        if (nextIndex == -1) return null;
+
+        return register(id, new Block(nextIndex, id, color));
     }
 
     @Override
