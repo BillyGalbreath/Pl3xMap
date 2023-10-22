@@ -52,7 +52,7 @@ public class UpdateSettingsData extends Task {
             .create();
 
     public UpdateSettingsData() {
-        super(1, true);
+        super(1 * 20, true);
     }
 
     @Override
@@ -62,36 +62,6 @@ public class UpdateSettingsData extends Task {
         } catch (Throwable t) {
             t.printStackTrace();
         }
-    }
-
-    private @NotNull List<@NotNull Object> parsePlayers() {
-        if (!PlayersLayerConfig.ENABLED) {
-            return Collections.emptyList();
-        }
-        List<Object> players = new ArrayList<>();
-        Pl3xMap.api().getPlayerRegistry().forEach(player -> {
-            // do not expose hidden players in the json
-            if (player.isHidden() || player.isNPC()) {
-                return;
-            }
-            if (PlayersLayerConfig.HIDE_SPECTATORS && player.isSpectator()) {
-                return;
-            }
-            if (PlayersLayerConfig.HIDE_INVISIBLE && player.isInvisible()) {
-                return;
-            }
-
-            Map<String, Object> playerEntry = new LinkedHashMap<>();
-
-            playerEntry.put("name", player.getDecoratedName());
-            playerEntry.put("uuid", player.getUUID().toString());
-            playerEntry.put("displayName", player.getDecoratedName());
-            playerEntry.put("world", player.getWorld().getName());
-            playerEntry.put("position", player.getPosition());
-
-            players.add(playerEntry);
-        });
-        return players;
     }
 
     private @NotNull List<@NotNull Map<@NotNull String, @NotNull Object>> parseWorlds() {
@@ -173,9 +143,10 @@ public class UpdateSettingsData extends Task {
         map.put("maxPlayers", Pl3xMap.api().getMaxPlayers());
         map.put("lang", lang);
         map.put("zoom", zoom);
+        map.put("useSSE", Config.SSE_EVENTS);
 
         try {
-            map.put("players", parsePlayers());
+            map.put("players", Pl3xMap.api().getPlayerRegistry().parsePlayers());
             map.put("worldSettings", parseWorlds());
         } catch (Throwable t) {
             t.printStackTrace();

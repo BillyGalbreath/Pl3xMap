@@ -73,7 +73,6 @@ public class Pl3xMapFabricServer extends Pl3xMap implements DedicatedServerModIn
     private FabricServerAudiences adventure;
 
     private boolean firstTick = true;
-    private int tick;
 
     private FabricNetwork network;
 
@@ -94,10 +93,7 @@ public class Pl3xMapFabricServer extends Pl3xMap implements DedicatedServerModIn
                 Pl3xMap.api().getEventRegistry().callEvent(new ServerLoadedEvent());
                 this.firstTick = false;
             }
-            if (this.tick++ >= 20) {
-                this.tick = 0;
-                getScheduler().tick();
-            }
+            getScheduler().tick();
         });
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
